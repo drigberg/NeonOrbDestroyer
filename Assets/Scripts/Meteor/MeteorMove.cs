@@ -42,21 +42,14 @@ public class MeteorMove : MonoBehaviour
         velocity.y = Mathf.Sqrt(velocity.x * velocity.x + maxSpeed * maxSpeed) * -1f;
     }
 
-    void RotateSmokeTrail() {
-        meteorTrail.transform.rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
+    void CreateSmokeTrail() {
+        meteorTrail = Instantiate(meteorTrailPrefab, transform.position, new Quaternion());
+        RotateSmokeTrail();
+        smoking = true;
     }
 
-    void CreateSmokeTrail() {
-        // float angle = Mathf.Cos(velocity.y / velocity.x) * 180f / Mathf.PI;
-        // Quaternion rotation = Quaternion.Euler(0, 0, angle - 180f);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
-        meteorTrail = Instantiate(meteorTrailPrefab, transform.position, rotation);
-        smoking = true;
-
-        // Quaternion q;
-        // vector a = crossproduct(v1, v2);
-        // q.xyz = a;
-        // q.w = sqrt((v1.Length ^ 2) * (v2.Length ^ 2)) + dotproduct(v1, v2);
+    void RotateSmokeTrail() {
+        meteorTrail.transform.rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
     }
 
     void Update()
