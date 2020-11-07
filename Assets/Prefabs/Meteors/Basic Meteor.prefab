@@ -207,7 +207,7 @@ MonoBehaviour:
   wallCheckLeft: {fileID: 4169023384572393931}
   wallCheckRight: {fileID: 4169023386526834572}
   playerCheck: {fileID: 4169023385912567765}
-  meteorTrailPrefab: {fileID: 6760882138885329738, guid: 2d4bac2bf9ecb4df083cea97f5423840,
+  meteorTrailPrefab: {fileID: 3712332368260205016, guid: 2d4bac2bf9ecb4df083cea97f5423840,
     type: 3}
   collisionDistance: 0.1
   groundMask:

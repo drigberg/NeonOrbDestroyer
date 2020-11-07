@@ -9,8 +9,8 @@ public class MeteorMove : MonoBehaviour
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
     public Transform playerCheck;
-    public GameObject meteorTrailPrefab;
-    private GameObject meteorTrail;
+    public MeteorTrail meteorTrailPrefab;
+    private MeteorTrail meteorTrail;
 
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
@@ -43,13 +43,9 @@ public class MeteorMove : MonoBehaviour
     }
 
     void CreateSmokeTrail() {
-        meteorTrail = Instantiate(meteorTrailPrefab, transform.position, new Quaternion());
-        RotateSmokeTrail();
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
+        meteorTrail = Instantiate(meteorTrailPrefab, transform.position, rotation);
         smoking = true;
-    }
-
-    void RotateSmokeTrail() {
-        meteorTrail.transform.rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
     }
 
     void Update()
@@ -82,10 +78,13 @@ public class MeteorMove : MonoBehaviour
         bool hittingWall = (onWallLeft && velocity.x < 0) || (onWallRight && velocity.x > 0);
         if (hittingWall) {
             velocity.x *= -1f;
+            if (smoking) {
+                // kill old trail before creating new one
+                meteorTrail.StopSmoking();
+                CreateSmokeTrail();
+            }
         }
-        if (smoking) {
-            RotateSmokeTrail();
-        }
+
     }
     void Fall() {
         BounceOffWalls();
@@ -95,7 +94,8 @@ public class MeteorMove : MonoBehaviour
             mode = Mode.RUNNING;
             velocity.x = maxSpeed * GetXDirection();
             velocity.y = 0f;
-            StopSmoking();
+            meteorTrail.StopSmoking();
+            smoking = false;
         }
 
         transform.Translate(velocity * Time.deltaTime);
@@ -113,14 +113,9 @@ public class MeteorMove : MonoBehaviour
     }
 
     void Explode() {
-        StopSmoking();
-        Destroy(gameObject);
-    }
-
-    void StopSmoking() {
         if (smoking) {
-            Destroy(meteorTrail);
-            smoking = false;
+            meteorTrail.StopSmoking();
         }
+        Destroy(gameObject);
     }
 }
