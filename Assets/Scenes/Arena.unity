@@ -1305,7 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad425c77f36044bc9e6796b24b10469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateProb: 0.001
+  generateProb: 0.01
   MeteorPrefab: {fileID: 4169023385540787604, guid: 64373bfc88c844c39b1fc8d45249faea,
     type: 3}
   maxSpawnX: 15
