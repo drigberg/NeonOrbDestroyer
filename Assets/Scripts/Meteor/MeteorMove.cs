@@ -10,6 +10,7 @@ public class MeteorMove : MonoBehaviour
     public Transform wallCheckRight;
     public Transform playerCheck;
     public MeteorTrail meteorTrailPrefab;
+    public Explosion explosionPrefab;
     private MeteorTrail meteorTrail;
 
     public float collisionDistance = 0.1f;
@@ -116,6 +117,7 @@ public class MeteorMove : MonoBehaviour
         if (smoking) {
             meteorTrail.StopSmoking();
         }
+        Instantiate(explosionPrefab, transform.position, new Quaternion());
         Destroy(gameObject);
     }
 }

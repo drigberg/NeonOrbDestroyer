@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7315563205294391093}
   - component: {fileID: 7315563205294391090}
   m_Layer: 8
-  m_Name: Raptor
+  m_Name: Basic Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ CharacterController:
   m_GameObject: {fileID: 7315563205294391088}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5

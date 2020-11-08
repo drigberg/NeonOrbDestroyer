@@ -58,6 +58,9 @@ public class PlayerMove : MonoBehaviour
             velocity.y = maxWallSlidingSpeed;
         }
         controller.Move(velocity * Time.deltaTime);
-        // transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        if (transform.position.z != 0f) {
+            Vector3 movementOffSet = new Vector3(0, 0, (0 - transform.position.z) * 0.05f);
+            controller.Move(movementOffSet);
+        }
     }
 }

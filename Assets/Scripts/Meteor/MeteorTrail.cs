@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorTrail : MonoBehaviour
 {
-    public ParticleSystem particleSystem;
+    public ParticleSystem particles;
     public float secondsToDestroy = 2f;
     private bool smoking;
 
@@ -27,6 +27,6 @@ public class MeteorTrail : MonoBehaviour
 
     public void StopSmoking() {
         smoking = false;
-        particleSystem.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
     }
 }
