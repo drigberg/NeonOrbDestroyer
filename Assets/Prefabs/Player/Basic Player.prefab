@@ -221,19 +221,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d56be92e4454dd3ace604c3a8018d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
   controller: {fileID: 7315563205294391093}
   groundCheck: {fileID: 7315563204953174185}
   wallCheckLeft: {fileID: 7315563204427824072}
   wallCheckRight: {fileID: 7315563205326361631}
   ceilingCheck: {fileID: 7315563205628674659}
   groundDistance: 0.2
-  groundMask:
+  platformMask:
     serializedVersion: 2
     m_Bits: 1
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  mesh: {fileID: 7315563204956278269}
+  defaultMaterial: {fileID: 2100000, guid: 776267822bc204dcbb7ef0518a96304f, type: 2}
+  attackingMaterial: {fileID: 2100000, guid: 05217d3a7415a41e0b3d83bdba190107, type: 2}
+  invincibilityMaterial1: {fileID: 2100000, guid: c9e2bff63b1744dea841828242b9c0b8,
+    type: 2}
+  invincibilityMaterial2: {fileID: 2100000, guid: f73462ebaf0e249bf8cca684aecd273a,
+    type: 2}
   speed: 20
   gravity: -120
   maxWallSlidingSpeed: -10
   jumpHeight: 6
+  enemyCheckDistance: 0.5
+  attackReach: 0.25
+  attackDuration: 0.25
+  attackDelayDuration: 0.1
+  invincibilityStepDuration: 0.3
+  invincibilitySteps: 4
+  explosionPrefab: {fileID: 638489994339031563, guid: 5bd9b4f3cfd494de39ce17c7185dfa52,
+    type: 3}
 --- !u!1 &7315563205326361628
 GameObject:
   m_ObjectHideFlags: 0

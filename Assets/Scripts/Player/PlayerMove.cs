@@ -4,29 +4,107 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public Hearts hearts;
+
     public CharacterController controller;
     public Transform groundCheck;
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
     public Transform ceilingCheck;
     public float groundDistance = 0.2f;
-    public LayerMask groundMask;
+    public LayerMask platformMask;
+    public LayerMask enemyMask;
+
+    public MeshRenderer mesh;
+    public Material defaultMaterial;
+    public Material attackingMaterial;
+    public Material invincibilityMaterial1;
+    public Material invincibilityMaterial2;
 
     public float speed = 20f;
     public float gravity = -120f;
     public float maxWallSlidingSpeed = -10f;
     public float jumpHeight = 6f;
 
+    public float enemyCheckDistance = 0.5f;
+    public float attackReach = 0.25f;
+
+    private bool attacking;
+    private bool attackingDelayed;
+    private bool invincible;
+
+    public float attackDuration = 0.25f;
+    public float attackDelayDuration = 0.1f;
+    public float invincibilityStepDuration = 0.3f;
+    public int invincibilitySteps = 4;
+
+    public Explosion explosionPrefab;
+
+    private bool isGrounded;
+    private bool onWallLeft;
+    private bool onWallRight;
+    private bool onCeiling;
+
     private Vector3 velocity;
 
-    void Update()
-    {
-        // check for collisions
-        bool isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        bool onWallLeft = Physics.CheckSphere(wallCheckLeft.position, groundDistance, groundMask);
-        bool onWallRight = Physics.CheckSphere(wallCheckRight.position, groundDistance, groundMask);
-        bool onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, groundMask);
+    void Start() {
+        mesh.material = defaultMaterial;
+    }
 
+    void Update() {
+        CheckForCollisions();
+        HandleNonMovementInput();
+        Move();
+    }
+
+    void CheckForCollisions() {
+        // check for platform collisions
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, platformMask);
+        onWallLeft = Physics.CheckSphere(wallCheckLeft.position, groundDistance, platformMask);
+        onWallRight = Physics.CheckSphere(wallCheckRight.position, groundDistance, platformMask);
+        onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
+
+        // check for enemy collisions
+        if (!invincible) {
+            float enemyCheckRadius = enemyCheckDistance;
+            if (attacking) {
+                enemyCheckRadius += attackReach;
+            }
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckDistance, enemyMask);
+            foreach (var hitCollider in hitColliders) {
+                hitCollider.SendMessage("Explode");
+            }
+            if (hitColliders.Length > 0 && !attacking) {
+                TakeDamage();
+            }
+        }
+    }
+
+    public void TakeDamage() {
+        Explode();
+        int heartsRemaining = hearts.SubtractOne();
+        if (heartsRemaining > 0) {
+            StartCoroutine("TriggerInvincibility");
+        } else {
+            GameOver();
+        }
+    }
+
+    void Explode() {
+        Instantiate(explosionPrefab, transform.position, new Quaternion());
+    }
+
+    void GameOver() {
+        Destroy(gameObject);
+    }
+
+    void HandleNonMovementInput() {
+        if (Input.GetKeyDown(KeyCode.M) && !attacking && !invincible && !attackingDelayed) {
+            StartCoroutine("Attack");
+        }
+    }
+
+    void Move() {
         if (isGrounded && velocity.y < 0f) {
             // stop moving downwards on floors
             velocity.y = -2f;
@@ -62,5 +140,34 @@ public class PlayerMove : MonoBehaviour
             Vector3 movementOffSet = new Vector3(0, 0, (0 - transform.position.z) * 0.05f);
             controller.Move(movementOffSet);
         }
+    }
+
+    private IEnumerator TriggerInvincibility() {
+        invincible = true;
+        int steps = 0;
+        while (steps < invincibilitySteps) {
+            mesh.material = invincibilityMaterial1;
+            yield return new WaitForSeconds(invincibilityStepDuration);
+            mesh.material = invincibilityMaterial2;
+            yield return new WaitForSeconds(invincibilityStepDuration);
+            steps += 1;
+        }
+        mesh.material = defaultMaterial;
+        invincible = false;
+    }
+
+    private IEnumerator Attack() {
+        attacking = true;
+        mesh.material = attackingMaterial;
+        yield return new WaitForSeconds(attackDuration);
+        mesh.material = defaultMaterial;
+        attacking = false;
+        StartCoroutine("TriggerAttackDelay");
+    }
+
+    private IEnumerator TriggerAttackDelay() {
+        attackingDelayed = true;
+        yield return new WaitForSeconds(attackDelayDuration);
+        attackingDelayed = false;
     }
 }

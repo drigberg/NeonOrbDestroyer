@@ -8,18 +8,14 @@ public class MeteorMove : MonoBehaviour
     public Transform ceilingCheck;
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
-    public Transform playerCheck;
     public MeteorTrail meteorTrailPrefab;
     public Explosion explosionPrefab;
     private MeteorTrail meteorTrail;
 
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
-    public LayerMask playerMask;
 
     public float maxSpeed = 20f;
-    public float gravity = -40f;
-    public float bounceHeight = 4f;
 
     private Vector3 velocity;
     private enum Mode {FALLING, RUNNING};
@@ -28,8 +24,6 @@ public class MeteorMove : MonoBehaviour
     private bool isGrounded;
     private bool onWallLeft;
     private bool onWallRight;
-    private bool onCeiling;
-    private bool hittingPlayer;
     private bool smoking;
 
     void Start() {
@@ -55,13 +49,6 @@ public class MeteorMove : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, collisionDistance, groundMask);
         onWallLeft = Physics.CheckSphere(wallCheckLeft.position, collisionDistance, groundMask);
         onWallRight = Physics.CheckSphere(wallCheckRight.position, collisionDistance, groundMask);
-        onCeiling = Physics.CheckSphere(ceilingCheck.position, collisionDistance, groundMask);
-        hittingPlayer = Physics.CheckSphere(playerCheck.position, 0.6f + collisionDistance, playerMask);
-
-        // explode if hitting player or ground
-        if (hittingPlayer) {
-            Explode();
-        }
 
         if (mode == Mode.FALLING) {
             Fall();
