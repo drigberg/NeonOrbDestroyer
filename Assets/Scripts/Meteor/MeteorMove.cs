@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeteorMove : MonoBehaviour
 {
+    public int points = 10;
     public Transform groundCheck;
     public Transform ceilingCheck;
     public Transform wallCheckLeft;
@@ -15,7 +16,8 @@ public class MeteorMove : MonoBehaviour
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
 
-    public float maxSpeed = 20f;
+    public float fallingSpeed = 7.5f;
+    public float maxSpeed = 15f;
 
     private Vector3 velocity;
     private enum Mode {FALLING, RUNNING};
@@ -33,8 +35,7 @@ public class MeteorMove : MonoBehaviour
 
     void StartFalling() {
         mode = Mode.FALLING;
-        velocity.x = Random.Range(maxSpeed * -0.85f, maxSpeed * 0.85f);
-        velocity.y = Mathf.Sqrt(velocity.x * velocity.x + maxSpeed * maxSpeed) * -1f;
+        velocity.y = fallingSpeed * -1f;
     }
 
     void CreateSmokeTrail() {
@@ -72,8 +73,8 @@ public class MeteorMove : MonoBehaviour
                 CreateSmokeTrail();
             }
         }
-
     }
+
     void Fall() {
         BounceOffWalls();
         meteorTrail.transform.position = transform.position;
@@ -98,6 +99,12 @@ public class MeteorMove : MonoBehaviour
             velocity.y = Mathf.Sqrt(maxSpeed * maxSpeed / 2f) * -1f;
         }
         transform.Translate(velocity * Time.deltaTime);
+    }
+
+    void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
+        sendExplodeArgs.dealDamage = true;
+        sendExplodeArgs.points = points;
+        Explode();
     }
 
     void Explode() {

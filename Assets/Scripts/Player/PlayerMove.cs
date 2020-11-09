@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -45,10 +46,14 @@ public class PlayerMove : MonoBehaviour
     private bool onWallRight;
     private bool onCeiling;
 
+    private int points;
     private Vector3 velocity;
+
+    public TMPro.TextMeshProUGUI pointsText;
 
     void Start() {
         mesh.material = defaultMaterial;
+        points = 0;
     }
 
     void Update() {
@@ -71,10 +76,22 @@ public class PlayerMove : MonoBehaviour
                 enemyCheckRadius += attackReach;
             }
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckDistance, enemyMask);
+            bool damageDealt = false;
             foreach (var hitCollider in hitColliders) {
-                hitCollider.SendMessage("Explode");
+                // tell the other object that we hit it and pass a mutable object to get data back
+                SendExplodeArgs sendExplodeArgs = new SendExplodeArgs();
+                hitCollider.SendMessage("ExplodeListener", sendExplodeArgs);
+
+                // take damage if it's an enemy and we're not attacking -- otherwise, collect points
+                if (sendExplodeArgs.dealDamage && !attacking) {
+                    damageDealt = true;
+                } else {
+                    points += sendExplodeArgs.points;
+                }
             }
-            if (hitColliders.Length > 0 && !attacking) {
+            pointsText.SetText(points.ToString());
+            // we only take damage once per frame, even if we're hit by multiple enemies
+            if (damageDealt) {
                 TakeDamage();
             }
         }
