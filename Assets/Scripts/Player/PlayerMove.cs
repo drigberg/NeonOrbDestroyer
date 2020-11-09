@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerMove : MonoBehaviour
 {
     public Hearts hearts;
+    public UI ui;
 
     public CharacterController controller;
     public Transform groundCheck;
@@ -49,8 +50,6 @@ public class PlayerMove : MonoBehaviour
     private int points;
     private Vector3 velocity;
 
-    public TMPro.TextMeshProUGUI pointsText;
-
     void Start() {
         mesh.material = defaultMaterial;
         points = 0;
@@ -91,7 +90,7 @@ public class PlayerMove : MonoBehaviour
             // NOTE: if an enemy hits us in the same frame we're getting a coin, we just accept the coin points
             points += sendExplodeArgs.points;
         }
-        pointsText.SetText(points.ToString());
+        ui.SetPoints(points);
         // we only take damage once per frame, even if we're hit by multiple enemies
         if (damageDealt) {
             TakeDamage();

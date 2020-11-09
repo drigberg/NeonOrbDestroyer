@@ -82,23 +82,27 @@ public class Coin : MonoBehaviour
             yield return new WaitForSeconds(blinkStepDuration / 2f);
             steps += 1;
         }
-        DestroySelf();
+        // no reward of explosions if it times out
+        DestroySelf(false);
     }
 
-    void DestroySelf() {
+    void DestroySelf(bool explode) {
         if (smoking) {
             trail.StopSmoking();
+        }
+
+        if (explode) {
+            Explode();
         }
         Destroy(gameObject);
     }
 
     void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
         sendExplodeArgs.points = points;
-        Explode();
+        DestroySelf(true);
     }
 
     void Explode() {
         Instantiate(explosionPrefab, transform.position, new Quaternion());
-        DestroySelf();
     }
 }

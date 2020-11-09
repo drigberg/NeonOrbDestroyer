@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorMove : MonoBehaviour
 {
-    public int points = 10;
+    public int points = 25;
     public Transform groundCheck;
     public Transform ceilingCheck;
     public Transform wallCheckLeft;
@@ -12,6 +12,10 @@ public class MeteorMove : MonoBehaviour
     public MeteorTrail meteorTrailPrefab;
     public Explosion explosionPrefab;
     private MeteorTrail meteorTrail;
+    public MeshRenderer mesh;
+
+    public Material defaultMaterial;
+    public Material blinkingMaterial;
 
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
@@ -23,12 +27,17 @@ public class MeteorMove : MonoBehaviour
     private enum Mode {FALLING, RUNNING};
     private Mode mode;
 
+    public float lifetimeSeconds = 10f;
+    public float blinkingSeconds = 3f;
+    public int numBlinks = 3;
+
     private bool isGrounded;
     private bool onWallLeft;
     private bool onWallRight;
     private bool smoking;
 
     void Start() {
+        mesh.material = defaultMaterial;
         StartFalling();
         CreateSmokeTrail();
     }
@@ -80,6 +89,7 @@ public class MeteorMove : MonoBehaviour
         meteorTrail.transform.position = transform.position;
 
         if (isGrounded) {
+            StartCoroutine("TriggerSelfDestructTimer");
             mode = Mode.RUNNING;
             velocity.x = maxSpeed * GetXDirection();
             velocity.y = 0f;
@@ -88,6 +98,23 @@ public class MeteorMove : MonoBehaviour
         }
 
         transform.Translate(velocity * Time.deltaTime);
+    }
+
+    private IEnumerator TriggerSelfDestructTimer() {
+        // wait for a bit
+        yield return new WaitForSeconds(lifetimeSeconds - blinkingSeconds);
+
+        // blink for final seconds before exploding
+        int steps = 0;
+        float blinkStepDuration = blinkingSeconds / (float)numBlinks;
+        while (steps < numBlinks) {
+            mesh.material = blinkingMaterial;
+            yield return new WaitForSeconds(blinkStepDuration / 2f);
+            mesh.material = defaultMaterial;
+            yield return new WaitForSeconds(blinkStepDuration / 2f);
+            steps += 1;
+        }
+        DestroySelf(false);
     }
 
     void Run() {
@@ -103,20 +130,28 @@ public class MeteorMove : MonoBehaviour
 
     void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
         if (!sendExplodeArgs.invincible) {
+            bool explode = false;
             if (sendExplodeArgs.attacking) {
                 sendExplodeArgs.points = points;
+                explode = true;
             } else {
                 sendExplodeArgs.dealDamage = true;
             }
-            Explode();
+            DestroySelf(explode);
         }
     }
 
-    void Explode() {
+    void DestroySelf(bool explode) {
         if (smoking) {
             meteorTrail.StopSmoking();
         }
-        Instantiate(explosionPrefab, transform.position, new Quaternion());
+        if (explode) {
+            Explode();
+        }
         Destroy(gameObject);
+    }
+
+    void Explode() {
+        Instantiate(explosionPrefab, transform.position, new Quaternion());
     }
 }

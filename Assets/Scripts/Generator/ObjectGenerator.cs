@@ -4,21 +4,55 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
+    public UI ui;
+    public int countdownSeconds = 3;
+    private bool isEnabled = false;
+
     public Coin CoinPrefab;
     public float coinGenerateProb = 0.001f;
 
     public MeteorMove MeteorPrefab;
-    public float meteorGenerateProb = 0.005f;
+    public float meteorGenerateProbInitial = 0.005f;
+    public float meteorGenerateProb;
     public float meteorProbStep = 0.00001f;
 
     public float maxSpawnX = 15f;
     public float spawnHeight = 30f;
 
+    void Start() {
+        StartCoroutine("CountdownToStart");
+    }
+
+    void Reset() {
+        meteorGenerateProb = meteorGenerateProbInitial;
+        isEnabled = false;
+    }
+
+    void Enable() {
+        isEnabled = true;
+    }
+
+    private IEnumerator CountdownToStart() {
+        Reset();
+        int steps = 0;
+        while (steps < countdownSeconds) {
+            ui.SetCountdown(countdownSeconds - steps);
+            yield return new WaitForSeconds(1);
+            steps += 1;
+        }
+        ui.CountDownZero();
+        yield return new WaitForSeconds(1);
+        ui.HideCountdown();
+        Enable();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        GenerateCoin();
-        GenerateMeteor();
+        if (isEnabled) {
+            GenerateCoin();
+            GenerateMeteor();
+        }
     }
 
     void GenerateCoin() {

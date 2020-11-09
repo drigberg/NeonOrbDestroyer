@@ -171,26 +171,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3c96c2bacf04b1ab3509f687b16e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 25
   groundCheck: {fileID: 818458228374823120}
   ceilingCheck: {fileID: 818458229388160006}
   wallCheckLeft: {fileID: 818458228131100208}
   wallCheckRight: {fileID: 818458229900988535}
-  playerCheck: {fileID: 818458229470750766}
   meteorTrailPrefab: {fileID: 3712332368260205016, guid: 2d4bac2bf9ecb4df083cea97f5423840,
     type: 3}
   explosionPrefab: {fileID: 8829738061801030694, guid: c91cac99a7d94441faff97ed9527daa5,
     type: 3}
-  player: {fileID: 0}
+  mesh: {fileID: 818458228545673173}
+  defaultMaterial: {fileID: 2100000, guid: 11c05eac07f16463a961ad35a06fc8b1, type: 2}
+  blinkingMaterial: {fileID: 2100000, guid: 71f6ecb395b3f417ab7b0873f97375b6, type: 2}
   collisionDistance: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 1
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
+  fallingSpeed: 7.5
   maxSpeed: 15
-  gravity: -40
-  bounceHeight: 4
+  lifetimeSeconds: 10
+  blinkingSeconds: 3
+  numBlinks: 3
 --- !u!1 &818458229388160005
 GameObject:
   m_ObjectHideFlags: 0
