@@ -1,15 +1,5 @@
-# raptors_vs_meteors
+# Neon Orb Destroyer
 
 ## About
 
-You're a velociraptor! Defeat the meteors!
-
-## POC Todos
-
-- raptor controller
-- meteors
-- damage
-- death
-- start screen
-- game over screen
-- points
+You're a person who hates neon orbs! Destroy them!
