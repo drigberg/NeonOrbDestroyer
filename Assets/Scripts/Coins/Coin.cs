@@ -93,7 +93,6 @@ public class Coin : MonoBehaviour
     }
 
     void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
-        sendExplodeArgs.dealDamage = false;
         sendExplodeArgs.points = points;
         Explode();
     }

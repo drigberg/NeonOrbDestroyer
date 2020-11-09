@@ -70,30 +70,31 @@ public class PlayerMove : MonoBehaviour
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
 
         // check for enemy collisions
-        if (!invincible) {
-            float enemyCheckRadius = enemyCheckDistance;
-            if (attacking) {
-                enemyCheckRadius += attackReach;
-            }
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckDistance, enemyMask);
-            bool damageDealt = false;
-            foreach (var hitCollider in hitColliders) {
-                // tell the other object that we hit it and pass a mutable object to get data back
-                SendExplodeArgs sendExplodeArgs = new SendExplodeArgs();
-                hitCollider.SendMessage("ExplodeListener", sendExplodeArgs);
+        float enemyCheckRadius = enemyCheckDistance;
+        if (attacking) {
+            enemyCheckRadius += attackReach;
+        }
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckDistance, enemyMask);
+        bool damageDealt = false;
+        foreach (var hitCollider in hitColliders) {
+            // tell the other object that we hit it and pass a mutable object to get data back
+            SendExplodeArgs sendExplodeArgs = new SendExplodeArgs();
+            sendExplodeArgs.invincible = invincible;
+            sendExplodeArgs.attacking = attacking;
+            hitCollider.SendMessage("ExplodeListener", sendExplodeArgs);
 
-                // take damage if it's an enemy and we're not attacking -- otherwise, collect points
-                if (sendExplodeArgs.dealDamage && !attacking) {
-                    damageDealt = true;
-                } else {
-                    points += sendExplodeArgs.points;
-                }
+            // listening object determines whether damage is dealt, and whether points are received
+            if (sendExplodeArgs.dealDamage) {
+                damageDealt = true;
             }
-            pointsText.SetText(points.ToString());
-            // we only take damage once per frame, even if we're hit by multiple enemies
-            if (damageDealt) {
-                TakeDamage();
-            }
+            // points defaults to 0, so we can always add them
+            // NOTE: if an enemy hits us in the same frame we're getting a coin, we just accept the coin points
+            points += sendExplodeArgs.points;
+        }
+        pointsText.SetText(points.ToString());
+        // we only take damage once per frame, even if we're hit by multiple enemies
+        if (damageDealt) {
+            TakeDamage();
         }
     }
 

@@ -102,9 +102,14 @@ public class MeteorMove : MonoBehaviour
     }
 
     void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
-        sendExplodeArgs.dealDamage = true;
-        sendExplodeArgs.points = points;
-        Explode();
+        if (!sendExplodeArgs.invincible) {
+            if (sendExplodeArgs.attacking) {
+                sendExplodeArgs.points = points;
+            } else {
+                sendExplodeArgs.dealDamage = true;
+            }
+            Explode();
+        }
     }
 
     void Explode() {
