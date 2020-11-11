@@ -20,7 +20,9 @@ public class MenuButton : MonoBehaviour
 
         if (menuButtonController.index == thisIndex) {
             animator.SetBool("selected", true);
-            if (Input.GetAxis("Submit") == 1) {
+            // we don't allow submit on Space because that's the player might be jumping when the game ends,
+            // and then we immediately get sent to the main menu
+            if (Input.GetKeyDown(KeyCode.Return)) {
                 animator.SetBool ("pressed", true);
                 OnSubmit();
             } else if (animator.GetBool ("pressed")) {
