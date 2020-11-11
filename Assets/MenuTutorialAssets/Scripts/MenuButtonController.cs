@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuButtonController : MonoBehaviour {
 
@@ -10,16 +9,24 @@ public class MenuButtonController : MonoBehaviour {
     [SerializeField] public bool keyDown;
     [SerializeField] public int maxIndex;
     public AudioSource audioSource;
-    public bool isDisabled;
+    public bool isEnabled = true;
 
     void Start () {
         audioSource = GetComponent<AudioSource>();
     }
 
+    public void Enable() {
+        isEnabled = true;
+    }
+
+    public void Disable() {
+        isEnabled = false;
+    }
+
     // Update is called once per frame
     void Update () {
         // don't scroll through options if disabled or if there's only one option
-        if (isDisabled || maxIndex == 0) {
+        if (!isEnabled || maxIndex == 0) {
             return;
         }
 
@@ -43,37 +50,6 @@ public class MenuButtonController : MonoBehaviour {
                 }
             }
             keyDown = true;
-        }
-    }
-
-    public void StartGame(bool hardMode) {
-        isDisabled = true;
-        // TODO: set hard mode in static property of GameSettings class
-        StartCoroutine(LoadArenaAsync());
-    }
-
-    public void ReturnToMenu() {
-        isDisabled = true;
-        StartCoroutine(LoadMainMenuAsync());
-    }
-
-    IEnumerator LoadArenaAsync()
-    {
-        yield return new WaitForSeconds(1);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Arena");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
-
-    IEnumerator LoadMainMenuAsync()
-    {
-        yield return new WaitForSeconds(1);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
         }
     }
 }
