@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -113,6 +114,16 @@ public class PlayerMove : MonoBehaviour
 
     void GameOver() {
         Destroy(gameObject);
+        StartCoroutine(LoadMenuAsync());
+    }
+
+    IEnumerator LoadMenuAsync()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     void HandleNonMovementInput() {
