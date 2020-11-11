@@ -35,3 +35,10 @@ You're a person who hates neon orbs! Destroy them!
 
 - pink orbs transform into silly neon pink running dudes with flailing arms
 - red orbs land, blink on a timer, blink rapidly while releasing smoke, then explode
+
+## Credits
+
+Main menu buttons created using sample assets by Thomas Brush.
+
+- Youtube: https://www.youtube.com/watch?v=vqZjZ6yv1lA&ab_channel=ThomasBrush
+- Github: https://github.com/atmosgames/unityMenuTutorial
