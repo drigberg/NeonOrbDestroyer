@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
 {
     public int points = 100;
     public Transform groundCheck;
-    public MeteorTrail trailPrefab;
+    public VerticalTrail trailPrefab;
     public Explosion explosionPrefab;
     public MeshRenderer mesh;
 
@@ -17,12 +17,13 @@ public class Coin : MonoBehaviour
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
 
+    public float rotationSpeed = 5f;
     public float fallingSpeed = 7.5f;
     public float waitTimeSeconds = 10f;
     public float blinkingSeconds = 3f;
     public int numBlinks = 3;
 
-    private MeteorTrail trail;
+    private VerticalTrail trail;
     private Vector3 velocity;
     private enum Mode {FALLING, WAITING};
     private Mode mode;
@@ -51,9 +52,14 @@ public class Coin : MonoBehaviour
     {
         // check for collisions
         isGrounded = Physics.CheckSphere(groundCheck.position, collisionDistance, groundMask);
+        Rotate();
         if (mode == Mode.FALLING) {
             Fall();
         }
+    }
+
+    void Rotate() {
+        transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
     }
 
     void Fall() {

@@ -11,10 +11,10 @@ public class ObjectGenerator : MonoBehaviour
     public Coin CoinPrefab;
     public float coinGenerateProb = 0.001f;
 
-    public MeteorMove MeteorPrefab;
-    public float meteorGenerateProbInitial = 0.005f;
-    public float meteorGenerateProb;
-    public float meteorProbStep = 0.00001f;
+    public PinkEnemyMove PinkEnemyPrefab;
+    public float pinkEnemyGenerateProbInitial = 0.005f;
+    public float pinkEnemyGenerateProb;
+    public float pinkEnemyProbStep = 0.00001f;
 
     public float maxSpawnX = 15f;
     public float spawnHeight = 30f;
@@ -24,7 +24,7 @@ public class ObjectGenerator : MonoBehaviour
     }
 
     void Reset() {
-        meteorGenerateProb = meteorGenerateProbInitial;
+        pinkEnemyGenerateProb = pinkEnemyGenerateProbInitial;
         isEnabled = false;
     }
 
@@ -51,7 +51,7 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (isEnabled) {
             GenerateCoin();
-            GenerateMeteor();
+            GeneratePinkEnemy();
         }
     }
 
@@ -63,12 +63,12 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
-    void GenerateMeteor() {
-        meteorGenerateProb += meteorProbStep * Time.deltaTime;
-        if (Random.Range(0f, 1f) < meteorGenerateProb) {
+    void GeneratePinkEnemy() {
+        pinkEnemyGenerateProb += pinkEnemyProbStep * Time.deltaTime;
+        if (Random.Range(0f, 1f) < pinkEnemyGenerateProb) {
             float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
             Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
-            MeteorMove meteor = Instantiate(MeteorPrefab, spawnPoint, new Quaternion());
+            PinkEnemyMove pinkEnemy = Instantiate(PinkEnemyPrefab, spawnPoint, new Quaternion());
         }
     }
 }

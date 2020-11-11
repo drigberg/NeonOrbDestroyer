@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 818458228545673172}
   - component: {fileID: 8429563985640292533}
   m_Layer: 9
-  m_Name: Basic Meteor
+  m_Name: Pink Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   ceilingCheck: {fileID: 818458229388160006}
   wallCheckLeft: {fileID: 818458228131100208}
   wallCheckRight: {fileID: 818458229900988535}
-  meteorTrailPrefab: {fileID: 3712332368260205016, guid: 2d4bac2bf9ecb4df083cea97f5423840,
+  trailPrefab: {fileID: 3712332368260205016, guid: 2d4bac2bf9ecb4df083cea97f5423840,
     type: 3}
   explosionPrefab: {fileID: 8829738061801030694, guid: c91cac99a7d94441faff97ed9527daa5,
     type: 3}

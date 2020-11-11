@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorTrail : MonoBehaviour
+public class VerticalTrail : MonoBehaviour
 {
     public ParticleSystem particles;
     public float secondsToDestroy = 2f;

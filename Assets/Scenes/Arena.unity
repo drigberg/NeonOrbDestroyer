@@ -2535,11 +2535,11 @@ MonoBehaviour:
   CoinPrefab: {fileID: 1299975538966488700, guid: f26b7c59f94ea4ecbaaa1d2b667525d9,
     type: 3}
   coinGenerateProb: 0.001
-  MeteorPrefab: {fileID: 8429563985640292533, guid: 4a97fbe0482f84eb381450a9561f55b0,
+  PinkEnemyPrefab: {fileID: 8429563985640292533, guid: 4a97fbe0482f84eb381450a9561f55b0,
     type: 3}
-  meteorGenerateProbInitial: 0.005
-  meteorGenerateProb: 0.005
-  meteorProbStep: 0.00001
+  pinkEnemyGenerateProbInitial: 0.005
+  pinkEnemyGenerateProb: 0
+  pinkEnemyProbStep: 0.00001
   maxSpawnX: 15
   spawnHeight: 30
 --- !u!4 &2075461927

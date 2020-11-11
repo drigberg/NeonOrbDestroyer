@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorMove : MonoBehaviour
+public class PinkEnemyMove : MonoBehaviour
 {
     public int points = 25;
     public Transform groundCheck;
     public Transform ceilingCheck;
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
-    public MeteorTrail meteorTrailPrefab;
+    public VerticalTrail trailPrefab;
     public Explosion explosionPrefab;
-    private MeteorTrail meteorTrail;
+    private VerticalTrail trail;
     public MeshRenderer mesh;
 
     public Material defaultMaterial;
@@ -49,7 +49,7 @@ public class MeteorMove : MonoBehaviour
 
     void CreateSmokeTrail() {
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
-        meteorTrail = Instantiate(meteorTrailPrefab, transform.position, rotation);
+        trail = Instantiate(trailPrefab, transform.position, rotation);
         smoking = true;
     }
 
@@ -78,7 +78,7 @@ public class MeteorMove : MonoBehaviour
             velocity.x *= -1f;
             if (smoking) {
                 // kill old trail before creating new one
-                meteorTrail.StopSmoking();
+                trail.StopSmoking();
                 CreateSmokeTrail();
             }
         }
@@ -86,14 +86,14 @@ public class MeteorMove : MonoBehaviour
 
     void Fall() {
         BounceOffWalls();
-        meteorTrail.transform.position = transform.position;
+        trail.transform.position = transform.position;
 
         if (isGrounded) {
             StartCoroutine("TriggerSelfDestructTimer");
             mode = Mode.RUNNING;
             velocity.x = maxSpeed * GetXDirection();
             velocity.y = 0f;
-            meteorTrail.StopSmoking();
+            trail.StopSmoking();
             smoking = false;
         }
 
@@ -143,7 +143,7 @@ public class MeteorMove : MonoBehaviour
 
     void DestroySelf(bool explode) {
         if (smoking) {
-            meteorTrail.StopSmoking();
+            trail.StopSmoking();
         }
         if (explode) {
             Explode();
