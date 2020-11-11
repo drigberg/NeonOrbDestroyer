@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField] MenuButtonController menuButtonController;
-    [SerializeField] Animator animator;
-    [SerializeField] AnimatorFunctions animatorFunctions;
-    [SerializeField] int thisIndex;
+    [SerializeField] public MenuButtonController menuButtonController;
+    [SerializeField] public Animator animator;
+    [SerializeField] public AnimatorFunctions animatorFunctions;
+    [SerializeField] public int thisIndex;
     public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU};
     public Action action;
 
