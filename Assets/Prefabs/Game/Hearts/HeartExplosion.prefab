@@ -4826,3 +4826,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToDestroy: 1
+  playSound: 0
+  soundEffect: {fileID: 0}
