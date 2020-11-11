@@ -18,7 +18,8 @@ public class MenuButtonController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (isDisabled) {
+        // don't scroll through options if disabled or if there's only one option
+        if (isDisabled || maxIndex == 0) {
             return;
         }
 

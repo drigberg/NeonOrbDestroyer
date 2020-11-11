@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   keyDown: 0
-  maxIndex: 1
+  maxIndex: 0
   audioSource: {fileID: 0}
   isDisabled: 0
 --- !u!114 &344269266 stripped
