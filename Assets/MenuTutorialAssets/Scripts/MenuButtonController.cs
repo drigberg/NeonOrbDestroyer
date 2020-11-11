@@ -47,13 +47,27 @@ public class MenuButtonController : MonoBehaviour {
 
     public void StartGame(bool hardMode) {
         isDisabled = true;
-        // set hard mode in static property of GameSettings class
+        // TODO: set hard mode in static property of GameSettings class
         StartCoroutine(LoadArenaAsync());
+    }
+
+    public void ReturnToMenu() {
+        isDisabled = true;
+        StartCoroutine(LoadMainMenuAsync());
     }
 
     IEnumerator LoadArenaAsync()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Arena");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadMainMenuAsync()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
         while (!asyncLoad.isDone)
         {
             yield return null;

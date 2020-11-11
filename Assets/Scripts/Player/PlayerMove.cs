@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    public Hearts hearts;
+    [Header ("UI")]
     public UI ui;
+    public MenuButtonController gameOverMenu;
+    public Text scoreText;
 
+    [Header ("Controllers")]
     public CharacterController controller;
+    public Hearts hearts;
+
+    [Header ("Prefabs")]
+    public Explosion explosionPrefab;
+
+    [Header ("Collisions")]
     public Transform groundCheck;
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
@@ -17,37 +26,37 @@ public class PlayerMove : MonoBehaviour
     public float groundDistance = 0.2f;
     public LayerMask platformMask;
     public LayerMask enemyMask;
+    public float enemyCheckDistance = 0.5f;
+    public float attackReach = 0.25f;
 
+    [Header ("Mesh")]
     public MeshRenderer mesh;
     public Material defaultMaterial;
     public Material attackingMaterial;
     public Material invincibilityMaterial1;
     public Material invincibilityMaterial2;
 
+    [Header ("Movement")]
     public float speed = 20f;
     public float gravity = -120f;
     public float maxWallSlidingSpeed = -10f;
     public float jumpHeight = 6f;
 
-    public float enemyCheckDistance = 0.5f;
-    public float attackReach = 0.25f;
 
-    private bool attacking;
-    private bool attackingDelayed;
-    private bool invincible;
-
+    [Header ("Timers")]
     public float attackDuration = 0.25f;
     public float attackDelayDuration = 0.1f;
     public float invincibilityStepDuration = 0.3f;
     public int invincibilitySteps = 4;
 
-    public Explosion explosionPrefab;
-
+    // State
+    private bool attacking;
+    private bool attackingDelayed;
+    private bool invincible;
     private bool isGrounded;
     private bool onWallLeft;
     private bool onWallRight;
     private bool onCeiling;
-
     private int points;
     private Vector3 velocity;
 
@@ -114,7 +123,9 @@ public class PlayerMove : MonoBehaviour
 
     void GameOver() {
         Destroy(gameObject);
-        StartCoroutine(LoadMenuAsync());
+        scoreText.text = "SCORE: " + points;
+        gameOverMenu.gameObject.SetActive(true);
+        // StartCoroutine(LoadMenuAsync());
     }
 
     IEnumerator LoadMenuAsync()

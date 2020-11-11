@@ -8,7 +8,8 @@ public class MenuButton : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] AnimatorFunctions animatorFunctions;
     [SerializeField] int thisIndex;
-    public bool hardMode;
+    public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU};
+    public Action action;
 
     // Update is called once per frame
     void Update() {
@@ -21,13 +22,23 @@ public class MenuButton : MonoBehaviour
             animator.SetBool("selected", true);
             if (Input.GetAxis("Submit") == 1) {
                 animator.SetBool ("pressed", true);
-                menuButtonController.StartGame(hardMode);
+                OnSubmit();
             } else if (animator.GetBool ("pressed")) {
                 animator.SetBool("pressed", false);
                 animatorFunctions.disableOnce = true;
             }
         } else {
             animator.SetBool("selected", false);
+        }
+    }
+
+    void OnSubmit() {
+        if (action == Action.NEW_GAME_EASY) {
+            menuButtonController.StartGame(false);
+        } else if (action == Action.NEW_GAME_HARD) {
+            menuButtonController.StartGame(true);
+        } else if (action == Action.RETURN_TO_MENU) {
+            menuButtonController.ReturnToMenu();
         }
     }
 }
