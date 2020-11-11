@@ -13,6 +13,7 @@ You're a person who hates neon orbs! Destroy them!
 ### Arena
 
 - pause
+- get rid of old font
 
 ### Audio
 

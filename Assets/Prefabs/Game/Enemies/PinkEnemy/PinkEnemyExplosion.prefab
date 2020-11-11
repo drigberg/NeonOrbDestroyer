@@ -1363,7 +1363,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
+        key0: {r: 1, g: 0, b: 0.82608795, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4769,7 +4769,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 527027c8baf2f0540be3104a3ec38a99, type: 2}
+  - {fileID: 2100000, guid: 85320f50710fcfb4d886bc56151bea1b, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4827,6 +4827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToDestroy: 1
+  playSound: 1
   soundEffect: {fileID: 8300000, guid: 8996f641520fd485785f3884205b26ce, type: 3}
 --- !u!82 &5637624484982579935
 AudioSource:
