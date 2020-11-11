@@ -49,6 +49,10 @@ public class PlayerMove : MonoBehaviour
     public float invincibilityStepDuration = 0.3f;
     public int invincibilitySteps = 4;
 
+    [Header ("Audio")]
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
+
     // State
     private bool canWallJump;
     private bool attacking;
@@ -62,6 +66,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 velocity;
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         mesh.material = defaultMaterial;
         points = 0;
     }
@@ -139,6 +144,16 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    void Jump() {
+        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        // only allow one wall jump between touching the ground
+        if (onWallLeft || onWallRight) {
+            canWallJump = false;
+        }
+        PlaySound(jumpSound);
+    }
+
     void Move() {
         if (isGrounded && velocity.y < 0f) {
             // stop moving downwards on floors
@@ -151,12 +166,7 @@ public class PlayerMove : MonoBehaviour
         // jump from ground or wall
         bool canJump = isGrounded || (canWallJump && (onWallLeft || onWallRight));
         if (Input.GetButtonDown("Jump") && canJump) {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-
-            // only allow one wall jump between touching the ground
-            if (onWallLeft || onWallRight) {
-                canWallJump = false;
-            }
+            Jump();
         }
 
         // move left and right
@@ -209,5 +219,9 @@ public class PlayerMove : MonoBehaviour
         attackingDelayed = true;
         yield return new WaitForSeconds(attackDelayDuration);
         attackingDelayed = false;
+    }
+
+    void PlaySound(AudioClip sound) {
+        audioSource.PlayOneShot(sound);
     }
 }

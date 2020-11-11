@@ -141,6 +141,10 @@ public class PinkEnemyMove : MonoBehaviour
         }
     }
 
+    public void ForceDestroyAndExplode() {
+        DestroySelf(true);
+    }
+
     void DestroySelf(bool explode) {
         if (smoking) {
             trail.StopSmoking();

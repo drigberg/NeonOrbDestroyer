@@ -65,6 +65,7 @@ public class ObjectGenerator : MonoBehaviour
             float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
             Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
             Coin coin = Instantiate(CoinPrefab, spawnPoint, new Quaternion());
+            coin.transform.parent = gameObject.transform;
         }
     }
 
@@ -74,6 +75,7 @@ public class ObjectGenerator : MonoBehaviour
             float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
             Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
             PinkEnemyMove pinkEnemy = Instantiate(PinkEnemyPrefab, spawnPoint, new Quaternion());
+            pinkEnemy.transform.parent = gameObject.transform;
         }
     }
 }

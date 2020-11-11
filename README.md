@@ -16,13 +16,8 @@ You're a person who hates neon orbs! Destroy them!
 
 ### Audio
 
-- jump
-- damage
-- coin explode
-- pink orb explode
-- menu select
-- menu submit
-- menu music
+- game over sound
+- ambient menu music
 - game music
 
 ### Player
