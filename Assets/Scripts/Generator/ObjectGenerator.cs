@@ -32,6 +32,11 @@ public class ObjectGenerator : MonoBehaviour
         isEnabled = true;
     }
 
+    public void Disable() {
+        isEnabled = false;
+        BroadcastMessage("DestroySelf", true, SendMessageOptions.DontRequireReceiver);
+    }
+
     private IEnumerator CountdownToStart() {
         Reset();
         int steps = 0;

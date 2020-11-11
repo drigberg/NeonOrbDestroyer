@@ -2143,6 +2143,11 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1751064593}
+    - target: {fileID: 7315563205294391090, guid: 6a738785a2dac43b7abb91c38cce2467,
+        type: 3}
+      propertyPath: objectGenerator
+      value: 
+      objectReference: {fileID: 2075461926}
     - target: {fileID: 7315563205294391091, guid: 6a738785a2dac43b7abb91c38cce2467,
         type: 3}
       propertyPath: m_LocalPosition.x

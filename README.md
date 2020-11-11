@@ -6,11 +6,6 @@ You're a person who hates neon orbs! Destroy them!
 
 ## TODO: POC
 
-### Arena
-
-- everything explodes on game over, and generators are disabled
-- bigger map, zoomed out
-
 ### Audio
 
 - jump
@@ -38,6 +33,12 @@ You're a person who hates neon orbs! Destroy them!
 - pink orbs transform into silly neon pink running dudes with flailing arms
 
 ## TODO: Post-POC
+
+### Arena
+
+- bigger map, zoomed out
+- moving platforms?
+- vertical platforms for wall jumping? (allow multiple wall jumps, if alternating left/right)
 
 ### High Score Table
 

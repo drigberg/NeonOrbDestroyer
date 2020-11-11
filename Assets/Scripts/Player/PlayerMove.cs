@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     [Header ("Controllers")]
     public CharacterController controller;
     public Hearts hearts;
+    public ObjectGenerator objectGenerator;
 
     [Header ("Prefabs")]
     public Explosion explosionPrefab;
@@ -128,6 +129,7 @@ public class PlayerMove : MonoBehaviour
 
     void GameOver() {
         Destroy(gameObject);
+        objectGenerator.Disable();
         scoreText.text = "SCORE: " + points;
         gameOverMenu.gameObject.SetActive(true);
         // StartCoroutine(LoadMenuAsync());
