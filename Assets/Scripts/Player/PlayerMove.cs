@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     public int invincibilitySteps = 4;
 
     // State
+    private bool canWallJump;
     private bool attacking;
     private bool attackingDelayed;
     private bool invincible;
@@ -77,6 +78,10 @@ public class PlayerMove : MonoBehaviour
         onWallLeft = Physics.CheckSphere(wallCheckLeft.position, groundDistance, platformMask);
         onWallRight = Physics.CheckSphere(wallCheckRight.position, groundDistance, platformMask);
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
+
+        if (isGrounded) {
+            canWallJump = true;
+        }
 
         // check for enemy collisions
         float enemyCheckRadius = enemyCheckDistance;
@@ -153,9 +158,14 @@ public class PlayerMove : MonoBehaviour
         }
 
         // jump from ground or wall
-        bool canJump = isGrounded || onWallLeft || onWallRight;
+        bool canJump = isGrounded || (canWallJump && (onWallLeft || onWallRight));
         if (Input.GetButtonDown("Jump") && canJump) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+            // only allow one wall jump between touching the ground
+            if (onWallLeft || onWallRight) {
+                canWallJump = false;
+            }
         }
 
         // move left and right

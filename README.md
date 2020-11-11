@@ -24,7 +24,6 @@ You're a person who hates neon orbs! Destroy them!
 
 ### Player
 
-- one wall jump between platforms
 - player mesh
 - running animation
 - jumping animation
