@@ -6,6 +6,14 @@ You're a person who hates neon orbs! Destroy them!
 
 ## TODO: POC
 
+### Menu
+
+- controls
+
+### Arena
+
+- pause
+
 ### Audio
 
 - jump
