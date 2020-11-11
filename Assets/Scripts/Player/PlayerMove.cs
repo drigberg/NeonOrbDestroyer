@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
@@ -132,16 +131,6 @@ public class PlayerMove : MonoBehaviour
         objectGenerator.Disable();
         scoreText.text = "SCORE: " + points;
         gameOverMenu.gameObject.SetActive(true);
-        // StartCoroutine(LoadMenuAsync());
-    }
-
-    IEnumerator LoadMenuAsync()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
     }
 
     void HandleNonMovementInput() {

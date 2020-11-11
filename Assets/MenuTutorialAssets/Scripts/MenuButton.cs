@@ -14,6 +14,8 @@ public class MenuButton : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (menuButtonController.isDisabled) {
+            animator.SetBool("selected", false);
+            animator.SetBool("pressed", false);
             animatorFunctions.disableOnce = true;
             return;
         }

@@ -59,6 +59,7 @@ public class MenuButtonController : MonoBehaviour {
 
     IEnumerator LoadArenaAsync()
     {
+        yield return new WaitForSeconds(1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Arena");
         while (!asyncLoad.isDone)
         {
@@ -68,6 +69,7 @@ public class MenuButtonController : MonoBehaviour {
 
     IEnumerator LoadMainMenuAsync()
     {
+        yield return new WaitForSeconds(1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
         while (!asyncLoad.isDone)
         {
