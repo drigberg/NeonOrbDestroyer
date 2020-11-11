@@ -4,14 +4,23 @@
 
 You're a person who hates neon orbs! Destroy them!
 
-## TODO
+## TODO: POC
 
-### Game
+### Arena
 
-- main menu
-- game over screen with button back to main menu
 - everything explodes on game over, and generators are disabled
 - bigger map, zoomed out
+
+### Audio
+
+- jump
+- damage
+- coin explode
+- pink orb explode
+- menu select
+- menu submit
+- menu music
+- game music
 
 ### Player
 
@@ -25,16 +34,26 @@ You're a person who hates neon orbs! Destroy them!
 - while gripping the wall, attack is up and down
 - wall-gripping attack animation
 
+### Enemies
+
+- pink orbs transform into silly neon pink running dudes with flailing arms
+
+## TODO: Post-POC
+
+### High Score Table
+
+- local high scores
+- global high scores: post to S3 with secret key? (separate scores by easy/hard mode)
+
 ### Drops
 
 - hearts restore health
 - green power-up doubles the attack effect area
 - yellow power-up grants a special wide-range force field attack on N
 
-### Enemies:
+### Enemies
 
-- pink orbs transform into silly neon pink running dudes with flailing arms
-- red orbs land, blink on a timer, blink rapidly while releasing smoke, then explode
+- more enemies (timed bombs? jumping enemies? flying enemies? projectiles?)
 
 ## Credits
 
