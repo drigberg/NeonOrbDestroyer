@@ -1,26 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI pointsText;
-    public TMPro.TextMeshProUGUI countdownText;
+    public Text pointsText;
+    public Text countdownText;
 
     public void SetPoints(int points) {
         pointsText.gameObject.SetActive(true);
-        pointsText.SetText(points.ToString());
+        pointsText.text = points.ToString();
     }
 
     public void SetCountdown(int seconds) {
         countdownText.gameObject.SetActive(true);
-        countdownText.SetText(seconds.ToString());
+        countdownText.text = seconds.ToString();
     }
     public void HideCountdown() {
-        countdownText.SetText("");
+        countdownText.text = "";
         countdownText.gameObject.SetActive(false);
     }
     public void CountDownZero() {
-        countdownText.SetText("GO");
+        countdownText.text = "GO";
     }
 }
