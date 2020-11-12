@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     public float attackReach = 0.25f;
 
     [Header ("Mesh")]
-    public MeshRenderer mesh;
+    public SkinnedMeshRenderer[] meshes;
     public Material defaultMaterial;
     public Material attackingMaterial;
     public Material invincibilityMaterial1;
@@ -65,9 +65,16 @@ public class PlayerMove : MonoBehaviour
     private int points;
     private Vector3 velocity;
 
+    void SetMesh(Material material) {
+        for (int i = 0; i < meshes.Length; i++) {
+            meshes[i].materials[0] = material;
+            meshes[i].material = material;
+        }
+    }
+
     void Start() {
         audioSource = GetComponent<AudioSource>();
-        mesh.material = defaultMaterial;
+        SetMesh(defaultMaterial);
         points = 0;
     }
 
@@ -196,21 +203,21 @@ public class PlayerMove : MonoBehaviour
         invincible = true;
         int steps = 0;
         while (steps < invincibilitySteps) {
-            mesh.material = invincibilityMaterial1;
+            SetMesh(invincibilityMaterial1);
             yield return new WaitForSeconds(invincibilityStepDuration);
-            mesh.material = invincibilityMaterial2;
+            SetMesh(invincibilityMaterial2);
             yield return new WaitForSeconds(invincibilityStepDuration);
             steps += 1;
         }
-        mesh.material = defaultMaterial;
+        SetMesh(defaultMaterial);
         invincible = false;
     }
 
     private IEnumerator Attack() {
         attacking = true;
-        mesh.material = attackingMaterial;
+        SetMesh(attackingMaterial);
         yield return new WaitForSeconds(attackDuration);
-        mesh.material = defaultMaterial;
+        SetMesh(defaultMaterial);
         attacking = false;
         StartCoroutine("TriggerAttackDelay");
     }
