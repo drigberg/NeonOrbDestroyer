@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header ("Animation")]
     public Animator animator;
+    public Transform bodyTransform;
 
     [Header ("Controllers")]
     public CharacterController controller;
@@ -57,6 +58,7 @@ public class PlayerMove : MonoBehaviour
     private AudioSource audioSource;
 
     // State
+    private bool facingRight;
     private bool canWallJump;
     private bool attacking;
     private bool attackingDelayed;
@@ -185,12 +187,22 @@ public class PlayerMove : MonoBehaviour
         // move left and right
         float x = Input.GetAxisRaw("Horizontal");
         if (x > 0) {
+            facingRight = true;
             velocity.x = speed;
+            animator.SetBool("movingLeftRight", true);
         } else if (x < 0) {
+            facingRight = false;
             velocity.x = speed * -1f;
+            animator.SetBool("movingLeftRight", true);
         } else {
             velocity.x = 0;
+            animator.SetBool("movingLeftRight", false);
         }
+
+        // rotate based on facing direction
+        int targetRotation = facingRight ? 270 : 90;
+        bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, Quaternion.Euler(0, targetRotation, 0), 0.1f);
+
 
         // slide downwards more slowly when gripping the wall
         bool grippingWall = (onWallLeft && x < 0) || (onWallRight && x > 0);
@@ -203,6 +215,7 @@ public class PlayerMove : MonoBehaviour
             Vector3 movementOffSet = new Vector3(0, 0, (0 - transform.position.z) * 0.05f);
             controller.Move(movementOffSet);
         }
+
     }
 
     private IEnumerator TriggerInvincibility() {
