@@ -10,6 +10,9 @@ public class PlayerMove : MonoBehaviour
     public MenuButtonController gameOverMenu;
     public Text scoreText;
 
+    [Header ("Animation")]
+    public Animator animator;
+
     [Header ("Controllers")]
     public CharacterController controller;
     public Hearts hearts;
@@ -92,7 +95,10 @@ public class PlayerMove : MonoBehaviour
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
 
         if (isGrounded) {
+            animator.SetBool("isGrounded", true);
             canWallJump = true;
+        } else {
+            animator.SetBool("isGrounded", false);
         }
 
         // check for enemy collisions
