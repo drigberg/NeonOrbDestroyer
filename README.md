@@ -9,7 +9,6 @@ You're a person who hates neon orbs! Destroy them!
 ### Arena
 
 - pause
-- get rid of old font
 
 ### Audio
 
@@ -19,9 +18,6 @@ You're a person who hates neon orbs! Destroy them!
 
 ### Player
 
-- player mesh
-- running animation
-- jumping animation
 - regular attacking animation
 - attack is a forward-facing neon explosion
 - while jumping, attack is forward plus both forward diagonals
