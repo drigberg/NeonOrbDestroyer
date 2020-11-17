@@ -97,11 +97,12 @@ public class PlayerMove : MonoBehaviour
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
 
         if (isGrounded) {
-            animator.SetBool("isGrounded", true);
             canWallJump = true;
-        } else {
-            animator.SetBool("isGrounded", false);
         }
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("grippingWallLeft", onWallLeft);
+        animator.SetBool("grippingWallRight", onWallRight);
+
 
         // check for enemy collisions
         float enemyCheckRadius = enemyCheckDistance;
@@ -201,6 +202,9 @@ public class PlayerMove : MonoBehaviour
 
         // rotate based on facing direction
         int targetRotation = facingRight ? 270 : 90;
+        if (onWallLeft || onWallRight) {
+            targetRotation = 0;
+        }
         bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, Quaternion.Euler(0, targetRotation, 0), 0.1f);
 
 
