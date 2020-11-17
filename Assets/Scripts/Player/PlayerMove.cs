@@ -13,6 +13,10 @@ public class PlayerMove : MonoBehaviour
     [Header ("Animation")]
     public Animator animator;
     public Transform bodyTransform;
+    public Weapon weaponPrefab;
+    public Transform rightElbow;
+    public Transform rightHand;
+    private Weapon weapon;
 
     [Header ("Controllers")]
     public CharacterController controller;
@@ -36,9 +40,7 @@ public class PlayerMove : MonoBehaviour
     [Header ("Mesh")]
     public SkinnedMeshRenderer[] meshes;
     public Material defaultMaterial;
-    public Material attackingMaterial;
-    public Material invincibilityMaterial1;
-    public Material invincibilityMaterial2;
+    public Material invincibilityMaterial;
 
     [Header ("Movement")]
     public float speed = 20f;
@@ -50,8 +52,7 @@ public class PlayerMove : MonoBehaviour
     [Header ("Timers")]
     public float attackDuration = 0.25f;
     public float attackDelayDuration = 0.1f;
-    public float invincibilityStepDuration = 0.3f;
-    public int invincibilitySteps = 4;
+    public float invincibilityDuration = 1.0f;
 
     [Header ("Audio")]
     public AudioClip jumpSound;
@@ -78,6 +79,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Start() {
+        weapon = Instantiate(weaponPrefab, rightHand.position, rightHand.rotation);
+        weapon.transform.parent = rightHand.transform;
         audioSource = GetComponent<AudioSource>();
         SetMesh(defaultMaterial);
         points = 0;
@@ -87,6 +90,15 @@ public class PlayerMove : MonoBehaviour
         CheckForCollisions();
         HandleNonMovementInput();
         Move();
+        HandleWeapon();
+    }
+
+    void HandleWeapon() {
+        // Keeps the weapon in the player's right hand, aligned outwards with the forearm
+        // Only shows the weapon if attacking
+        weapon.transform.position = rightHand.position;
+        weapon.transform.rotation = Quaternion.LookRotation(rightHand.position - rightElbow.position, Vector3.forward);
+        weapon.gameObject.SetActive(attacking);
     }
 
     void CheckForCollisions() {
@@ -109,7 +121,7 @@ public class PlayerMove : MonoBehaviour
         if (attacking) {
             enemyCheckRadius += attackReach;
         }
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckDistance, enemyMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckRadius, enemyMask);
         bool damageDealt = false;
         foreach (var hitCollider in hitColliders) {
             // tell the other object that we hit it and pass a mutable object to get data back
@@ -224,24 +236,18 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator TriggerInvincibility() {
         invincible = true;
-        int steps = 0;
-        while (steps < invincibilitySteps) {
-            SetMesh(invincibilityMaterial1);
-            yield return new WaitForSeconds(invincibilityStepDuration);
-            SetMesh(invincibilityMaterial2);
-            yield return new WaitForSeconds(invincibilityStepDuration);
-            steps += 1;
-        }
+        SetMesh(invincibilityMaterial);
+        yield return new WaitForSeconds(invincibilityDuration);
         SetMesh(defaultMaterial);
         invincible = false;
     }
 
     private IEnumerator Attack() {
         attacking = true;
-        SetMesh(attackingMaterial);
+        animator.SetBool("attacking", true);
         yield return new WaitForSeconds(attackDuration);
-        SetMesh(defaultMaterial);
         attacking = false;
+        animator.SetBool("attacking", false);
         StartCoroutine("TriggerAttackDelay");
     }
 

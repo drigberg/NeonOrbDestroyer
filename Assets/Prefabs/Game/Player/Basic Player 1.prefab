@@ -101,6 +101,12 @@ MonoBehaviour:
   ui: {fileID: 0}
   gameOverMenu: {fileID: 0}
   scoreText: {fileID: 0}
+  animator: {fileID: 0}
+  bodyTransform: {fileID: 0}
+  weaponPrefab: {fileID: 1740730466817315787, guid: d67c3712964e5432ab7efd4d395e6e30,
+    type: 3}
+  rightElbow: {fileID: 8730632457680158998}
+  rightHand: {fileID: 4384008863036610841}
   controller: {fileID: 8355071575326622453}
   hearts: {fileID: 0}
   objectGenerator: {fileID: 0}
@@ -126,10 +132,7 @@ MonoBehaviour:
   - {fileID: 8037650754142758046}
   - {fileID: 7675673728569686383}
   defaultMaterial: {fileID: 2100000, guid: 776267822bc204dcbb7ef0518a96304f, type: 2}
-  attackingMaterial: {fileID: 2100000, guid: 05217d3a7415a41e0b3d83bdba190107, type: 2}
-  invincibilityMaterial1: {fileID: 2100000, guid: c9e2bff63b1744dea841828242b9c0b8,
-    type: 2}
-  invincibilityMaterial2: {fileID: 2100000, guid: f73462ebaf0e249bf8cca684aecd273a,
+  invincibilityMaterial: {fileID: 2100000, guid: c9e2bff63b1744dea841828242b9c0b8,
     type: 2}
   speed: 20
   gravity: -120
@@ -137,8 +140,7 @@ MonoBehaviour:
   jumpHeight: 6
   attackDuration: 0.4
   attackDelayDuration: 0.1
-  invincibilityStepDuration: 0.2
-  invincibilitySteps: 4
+  invincibilityDuration: 1
   jumpSound: {fileID: 8300000, guid: 1c6b12136da934c3a9f0d81f853b733f, type: 3}
 --- !u!82 &2611683782747561509
 AudioSource:
@@ -435,6 +437,18 @@ SkinnedMeshRenderer:
 --- !u!137 &7675673728569686383 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -955926949336913161, guid: 2fa2ec17831c44c309cc39d38dc2e0e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1747015226533696408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8730632457680158998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2227088422823472498, guid: 2fa2ec17831c44c309cc39d38dc2e0e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1747015226533696408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4384008863036610841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6563567909488342399, guid: 2fa2ec17831c44c309cc39d38dc2e0e5,
     type: 3}
   m_PrefabInstance: {fileID: 1747015226533696408}
   m_PrefabAsset: {fileID: 0}

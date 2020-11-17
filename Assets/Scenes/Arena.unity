@@ -1195,6 +1195,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &795865792 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8730632457680158998, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618257558938019822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &871187994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2240,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1837114696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4384008863036610841, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618257558938019822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842611316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,13 +2419,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 704826966}
   countdownSeconds: 3
-  CoinPrefab: {fileID: 1299975538966488700, guid: f26b7c59f94ea4ecbaaa1d2b667525d9,
+  coinPrefab: {fileID: 1299975538966488700, guid: f26b7c59f94ea4ecbaaa1d2b667525d9,
     type: 3}
   coinGenerateProb: 0.001
   PinkEnemyPrefab: {fileID: 8429563985640292533, guid: 4a97fbe0482f84eb381450a9561f55b0,
     type: 3}
   pinkEnemyGenerateProbInitial: 0.005
-  pinkEnemyGenerateProb: 0
   pinkEnemyProbStep: 0.00001
   maxSpawnX: 15
   spawnHeight: 30
@@ -2438,6 +2449,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2611683782747561509, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622448, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_Name
@@ -2478,6 +2494,21 @@ PrefabInstance:
       propertyPath: bodyTransform
       value: 
       objectReference: {fileID: 543139954}
+    - target: {fileID: 8355071575326622450, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1837114696}
+    - target: {fileID: 8355071575326622450, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+        type: 3}
+      propertyPath: rightElbow
+      value: 
+      objectReference: {fileID: 795865792}
+    - target: {fileID: 8355071575326622450, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+        type: 3}
+      propertyPath: attackReach
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.x

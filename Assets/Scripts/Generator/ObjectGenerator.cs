@@ -8,13 +8,13 @@ public class ObjectGenerator : MonoBehaviour
     public int countdownSeconds = 3;
     private bool isEnabled = false;
 
-    public Coin CoinPrefab;
+    public Coin coinPrefab;
     public float coinGenerateProb = 0.001f;
 
     public PinkEnemyMove PinkEnemyPrefab;
     public float pinkEnemyGenerateProbInitial = 0.005f;
-    public float pinkEnemyGenerateProb;
     public float pinkEnemyProbStep = 0.00001f;
+    private float pinkEnemyGenerateProb;
 
     public float maxSpawnX = 15f;
     public float spawnHeight = 30f;
@@ -64,7 +64,7 @@ public class ObjectGenerator : MonoBehaviour
         if (Random.Range(0f, 1f) < coinGenerateProb) {
             float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
             Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
-            Coin coin = Instantiate(CoinPrefab, spawnPoint, new Quaternion());
+            Coin coin = Instantiate(coinPrefab, spawnPoint, new Quaternion());
             coin.transform.parent = gameObject.transform;
         }
     }
