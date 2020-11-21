@@ -50,7 +50,7 @@ ModelImporter:
     second: Armature|SwordCircle
   - first:
       74: -1459885458655147702
-    second: Armature|SwordCircleFront
+    second: Armature|Stab
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -259,8 +259,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SwordCircleFront
-      takeName: Armature|SwordCircleFront
+      name: Armature|Stab
+      takeName: Armature|Stab
       internalID: 0
       firstFrame: 0
       lastFrame: 50

@@ -1,13 +1,14 @@
-# Neon Orb Destroyer
+# The House of Glow
 
 ## About
 
-You're a person who hates neon orbs! Destroy them!
+You're trapped in the House of Glow! Fight your way out!
 
-## TODO: POC
+## TODO: V1
 
 ### Arena
 
+- bigger map, zoomed out
 - pause
 
 ### Audio
@@ -18,23 +19,28 @@ You're a person who hates neon orbs! Destroy them!
 
 ### Player
 
-- regular attacking animation
-- attack is a forward-facing neon explosion
+- regular attack only casts forwards
 - while jumping, attack is forward plus both forward diagonals
 - while gripping the wall, attack is up and down
 - wall-gripping attack animation
 
-### Enemies
+## TODO: V2
 
-- pink orbs transform into silly neon pink running dudes with flailing arms
+### Player
 
-## TODO: Post-POC
+- allow multiple wall jumps, if alternating left/right
 
-### Arena
+### Scenes
 
-- bigger map, zoomed out
-- moving platforms?
-- vertical platforms for wall jumping? (allow multiple wall jumps, if alternating left/right)
+- Empty starting room --> hall -> empty room with NPC --> first room
+- empty room after first arena, with NPC
+- second arena
+- final room with an NPC that says that the game isn't done yet
+
+### Arena elements
+
+- moving platforms
+- vertical platforms for wall jumping
 
 ### High Score Table
 
@@ -44,12 +50,15 @@ You're a person who hates neon orbs! Destroy them!
 ### Drops
 
 - hearts restore health
-- green power-up doubles the attack effect area
-- yellow power-up grants a special wide-range force field attack on N
+- blue power-up doubles the attack effect area
+- red power-up grants a special wide-range force field attack on N
 
 ### Enemies
 
-- more enemies (timed bombs? jumping enemies? flying enemies? projectiles?)
+- more of them!
+- enemies with more health
+- enemies with projectiles
+- enemies with attack moves
 
 ## Credits
 

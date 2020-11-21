@@ -538,8 +538,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword Circle
-  m_Speed: 2
+  m_Name: Stab
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6264075015944138274}
