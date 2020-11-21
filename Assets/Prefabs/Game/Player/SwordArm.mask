@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SwordArm
+  m_Mask: 00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Arm.L
+    m_Weight: 0
+  - m_Path: Arm.R
+    m_Weight: 0
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Body Center
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach/Chest
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach/Chest/Neck
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach/Chest/Neck/Head
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach/Chest/Neck/Head/Head_end
+    m_Weight: 0
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.L
+    m_Weight: 1
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.L/Lower arm.L
+    m_Weight: 1
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.L/Lower arm.L/Lower arm.L_end
+    m_Weight: 1
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.R
+    m_Weight: 1
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.R/Lower arm.R
+    m_Weight: 1
+  - m_Path: Armature/Body Center/Stomach/Chest/Upper arm.R/Lower arm.R/Lower arm.R_end
+    m_Weight: 1
+  - m_Path: Armature/Body Center.001
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.001
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.001/Lower leg.R.001
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.001/Lower leg.R.001/Lower leg.R.001_end
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.002
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.002/Lower leg.R.002
+    m_Weight: 0
+  - m_Path: Armature/Body Center.001/Upper leg.R.002/Lower leg.R.002/Lower leg.R.002_end
+    m_Weight: 0
+  - m_Path: Body
+    m_Weight: 0
+  - m_Path: Leg.L
+    m_Weight: 0
+  - m_Path: Leg.R
+    m_Weight: 0

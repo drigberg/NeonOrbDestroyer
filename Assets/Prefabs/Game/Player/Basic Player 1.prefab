@@ -138,8 +138,8 @@ MonoBehaviour:
   gravity: -120
   maxWallSlidingSpeed: -10
   jumpHeight: 6
-  attackDuration: 0.4
-  attackDelayDuration: 0.1
+  attackDuration: 0.2
+  attackDelayDuration: 0.2
   invincibilityDuration: 1
   jumpSound: {fileID: 8300000, guid: 1c6b12136da934c3a9f0d81f853b733f, type: 3}
 --- !u!82 &2611683782747561509
