@@ -48,6 +48,9 @@ ModelImporter:
   - first:
       74: -7147425776826959930
     second: Armature|SwordCircle
+  - first:
+      74: -1459885458655147702
+    second: Armature|SwordCircleFront
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -86,7 +89,7 @@ ModelImporter:
       takeName: Armature|Running
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -144,7 +147,7 @@ ModelImporter:
       takeName: Armature|Rolling
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -173,7 +176,7 @@ ModelImporter:
       takeName: Armature|Standing
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -202,7 +205,7 @@ ModelImporter:
       takeName: Armature|Wall Grip Left
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -231,7 +234,7 @@ ModelImporter:
       takeName: Armature|Wall Grip Right
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -256,11 +259,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SwordCircle
-      takeName: Armature|SwordCircle
+      name: Armature|SwordCircleFront
+      takeName: Armature|SwordCircleFront
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

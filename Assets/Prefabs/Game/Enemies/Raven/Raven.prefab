@@ -150,8 +150,8 @@ MonoBehaviour:
   fallingSpeed: 5
   maxSpeed: 10
   lifetimeSeconds: 10
-  blinkingSeconds: 3
-  numBlinks: 3
+  blinkingSeconds: 1.5
+  numBlinks: 9
 --- !u!1 &818458229388160005
 GameObject:
   m_ObjectHideFlags: 0
