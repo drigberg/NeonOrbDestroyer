@@ -1,53 +1,11 @@
 fileFormatVersion: 2
-guid: e3aad2ce96d78405e99139580056c9f7
+guid: ff7f7420e9aae42e58b1b43396407b10
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 885944232402757753
-    second: Armature|Action
-  - first:
-      74: 7399462096315819049
-    second: Armature|Attacking
-  - first:
-      74: 6881873686158965456
-    second: Armature|Falling
-  - first:
-      74: 5508062484833401239
-    second: Armature|PoseLib
-  - first:
-      74: -392775870743515681
-    second: Armature|Rolling
-  - first:
-      74: -3828583913261678786
-    second: Armature|Running
-  - first:
-      74: -4728361552675377119
-    second: Armature|Standing
-  - first:
-      74: -7026788989867827227
-    second: Armature|Swimming
-  - first:
-      74: 8527100257146170501
-    second: Armature|Swimming 2
-  - first:
-      74: -8295671334811445180
-    second: Armature|Swimming 3
-  - first:
-      74: -4495041674485455874
-    second: Armature|Swimming Final
-  - first:
-      74: -7147425776826959930
-    second: Armature|SwordCircle
-  - first:
-      74: 7357782960997885429
-    second: Armature|Wall Grip Left
-  - first:
-      74: 1145985416950013654
-    second: Armature|Wall Grip Right
-  - first:
-      74: 4829966686875344911
-    second: Armature|Waving
+      74: -623603649343465320
+    second: Scene
   externalObjects: {}
   materials:
     materialImportMode: 1

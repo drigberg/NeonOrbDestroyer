@@ -2,35 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PinkEnemyMove : MonoBehaviour
+public class RavenMovement : MonoBehaviour
 {
     public int points = 25;
-    public Transform groundCheck;
-    public Transform ceilingCheck;
-    public Transform wallCheckLeft;
-    public Transform wallCheckRight;
+
+    [Header ("Animation")]
+    public Animator animator;
+    public SkinnedMeshRenderer mesh;
+    public Transform bodyTransform;
+
+    [Header ("Prefabs")]
     public VerticalTrail trailPrefab;
     public Explosion explosionPrefab;
     private VerticalTrail trail;
-    public MeshRenderer mesh;
 
+    [Header ("Materials")]
     public Material defaultMaterial;
     public Material blinkingMaterial;
 
+    [Header ("Collisions")]
     public float collisionDistance = 0.1f;
     public LayerMask groundMask;
+    public Transform wallCheckLeft;
+    public Transform wallCheckRight;
+    public Transform ceilingCheck;
+    public Transform groundCheck;
 
-    public float fallingSpeed = 7.5f;
-    public float maxSpeed = 15f;
-
+    [Header ("Movement")]
+    public float fallingSpeed = 5f;
+    public float maxSpeed = 10f;
     private Vector3 velocity;
     private enum Mode {FALLING, RUNNING};
     private Mode mode;
 
+    [Header ("Lifetime")]
     public float lifetimeSeconds = 10f;
     public float blinkingSeconds = 3f;
     public int numBlinks = 3;
 
+    // State
     private bool isGrounded;
     private bool onWallLeft;
     private bool onWallRight;
@@ -60,12 +70,14 @@ public class PinkEnemyMove : MonoBehaviour
         onWallLeft = Physics.CheckSphere(wallCheckLeft.position, collisionDistance, groundMask);
         onWallRight = Physics.CheckSphere(wallCheckRight.position, collisionDistance, groundMask);
 
+        animator.SetBool("isGrounded", isGrounded);
+
         if (mode == Mode.FALLING) {
             Fall();
         } else {
             Run();
         }
-
+        Rotate();
     }
 
     float GetXDirection() {
@@ -117,6 +129,19 @@ public class PinkEnemyMove : MonoBehaviour
         DestroySelf(false);
     }
 
+    void Rotate() {
+        int targetRotation = 0;
+        if (mode == Mode.RUNNING) {
+            float direction = GetXDirection();
+            if (direction > 0) {
+                targetRotation = 270;
+            } else {
+                targetRotation = 90;
+            }
+        }
+        bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, Quaternion.Euler(0, targetRotation, 0), 0.1f);
+    }
+
     void Run() {
         BounceOffWalls();
         if (isGrounded) {
@@ -128,7 +153,7 @@ public class PinkEnemyMove : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
+    public void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
         if (!sendExplodeArgs.invincible) {
             bool explode = false;
             if (sendExplodeArgs.attacking) {

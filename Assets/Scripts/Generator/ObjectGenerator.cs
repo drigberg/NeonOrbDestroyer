@@ -11,10 +11,10 @@ public class ObjectGenerator : MonoBehaviour
     public Coin coinPrefab;
     public float coinGenerateProb = 0.001f;
 
-    public PinkEnemyMove PinkEnemyPrefab;
-    public float pinkEnemyGenerateProbInitial = 0.005f;
-    public float pinkEnemyProbStep = 0.00001f;
-    private float pinkEnemyGenerateProb;
+    public RavenMovement RavenPrefab;
+    public float ravenGenerateProbInitial = 0.005f;
+    public float ravenProbStep = 0.00001f;
+    private float ravenGenerateProb;
 
     public float maxSpawnX = 15f;
     public float spawnHeight = 30f;
@@ -24,7 +24,7 @@ public class ObjectGenerator : MonoBehaviour
     }
 
     void Reset() {
-        pinkEnemyGenerateProb = pinkEnemyGenerateProbInitial;
+        ravenGenerateProb = ravenGenerateProbInitial;
         isEnabled = false;
     }
 
@@ -56,7 +56,7 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (isEnabled) {
             GenerateCoin();
-            GeneratePinkEnemy();
+            GenerateRaven();
         }
     }
 
@@ -69,13 +69,13 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
-    void GeneratePinkEnemy() {
-        pinkEnemyGenerateProb += pinkEnemyProbStep * Time.deltaTime;
-        if (Random.Range(0f, 1f) < pinkEnemyGenerateProb) {
+    void GenerateRaven() {
+        ravenGenerateProb += ravenProbStep * Time.deltaTime;
+        if (Random.Range(0f, 1f) < ravenGenerateProb) {
             float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
             Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
-            PinkEnemyMove pinkEnemy = Instantiate(PinkEnemyPrefab, spawnPoint, new Quaternion());
-            pinkEnemy.transform.parent = gameObject.transform;
+            RavenMovement raven = Instantiate(RavenPrefab, spawnPoint, new Quaternion());
+            raven.transform.parent = gameObject.transform;
         }
     }
 }
