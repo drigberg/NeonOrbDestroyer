@@ -354,7 +354,9 @@ MonoBehaviour:
 
     JUMP
 
-    ATTACK'
+    ATTACK
+
+    PAUSE'
 --- !u!222 &541997113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -994,6 +996,7 @@ MonoBehaviour:
   screens:
   - {fileID: 393537003}
   - {fileID: 1280532232}
+  startVisible: 1
 --- !u!1001 &909341672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2052,7 +2055,9 @@ MonoBehaviour:
 
     SPACE
 
-    M'
+    M
+
+    P'
 --- !u!222 &2044628892
 CanvasRenderer:
   m_ObjectHideFlags: 0

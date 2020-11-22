@@ -500,7 +500,7 @@ MonoBehaviour:
   index: 0
   keyDown: 0
   maxIndex: 0
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 162302049}
   isEnabled: 1
 --- !u!82 &162302049
 AudioSource:
@@ -1842,7 +1842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 414}
+  m_AnchoredPosition: {x: 0, y: 88}
   m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007640101
@@ -2213,7 +2213,7 @@ PrefabInstance:
       objectReference: {fileID: 162302048}
     - target: {fileID: 1120576110, guid: 3c614e9cd35bf468b8d2f1689cc4cca8, type: 3}
       propertyPath: action
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1120576110, guid: 3c614e9cd35bf468b8d2f1689cc4cca8, type: 3}
       propertyPath: menuController
@@ -2228,7 +2228,7 @@ PrefabInstance:
         type: 3}
       propertyPath: menuButtonController
       value: 
-      objectReference: {fileID: 289441043}
+      objectReference: {fileID: 162302048}
     - target: {fileID: 4369065082735945914, guid: 3c614e9cd35bf468b8d2f1689cc4cca8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2851,6 +2851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 704826966}
   countdownSeconds: 3
+  isEnabled: 0
   coinPrefab: {fileID: 1299975538966488700, guid: f26b7c59f94ea4ecbaaa1d2b667525d9,
     type: 3}
   coinGenerateProb: 0.001
