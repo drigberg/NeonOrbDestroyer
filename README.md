@@ -55,6 +55,8 @@ You're trapped in the House of Glow! Fight your way out!
 
 - moving platforms
 - vertical platforms for wall jumping
+- platforms pulse with the music
+- hearts beat with the music
 
 ### High Score Table
 
