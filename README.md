@@ -8,24 +8,26 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Menus
 
-- pause menu
-- volume controls in main menu
+1. pause menu
+2. volume controls in main menu
 
 ### Camera
 
-- camera and text are clearly positioned
+3. camera and text are clearly positioned
 
 ### Audio
 
-- game over sound
-- ambient menu music
-- game music
+4. game over sound
+5. better jumping and damage sounds
+6. attacking sound
+7. ambient menu music
+8. game music
 
 ### Player
 
-- regular attack only casts forwards
-- attack still casts everywhere while spinning, but not as far
-- nicer attack animation: sword trail? swinging sword down?
+9. regular attack only casts forwards
+10. attack still casts everywhere while spinning, but not as far
+11. nicer attack animation: sword trail? swinging sword down?
 
 ## TODO: V2
 
@@ -35,7 +37,7 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Player
 
-- allow multiple wall jumps, if alternating left/right
+- allow multiple wall jumps after contact with the wall is broken
 - while jumping, attack is forward plus both forward diagonals
 - while gripping the wall, attack is up and down
 - wall-gripping attack animation
