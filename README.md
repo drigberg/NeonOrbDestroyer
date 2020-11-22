@@ -6,11 +6,14 @@ You're trapped in the House of Glow! Fight your way out!
 
 ## TODO: V1
 
-### Arena
+### Menus
 
-- bigger map, zoomed out
-- pause
-- volume controls in pause menu
+- pause menu
+- volume controls in main menu
+
+### Camera
+
+- camera and text are clearly positioned
 
 ### Audio
 
@@ -21,22 +24,30 @@ You're trapped in the House of Glow! Fight your way out!
 ### Player
 
 - regular attack only casts forwards
-- while jumping, attack is forward plus both forward diagonals
-- while gripping the wall, attack is up and down
-- wall-gripping attack animation
+- attack still casts everywhere while spinning, but not as far
+- nicer attack animation: sword trail? swinging sword down?
 
 ## TODO: V2
+
+### Menus
+
+- menu buttons broadcast "Action" message, which is heard by child component
 
 ### Player
 
 - allow multiple wall jumps, if alternating left/right
+- while jumping, attack is forward plus both forward diagonals
+- while gripping the wall, attack is up and down
+- wall-gripping attack animation
 
 ### Scenes
 
+- bigger rooms, zoomed out
 - Empty starting room --> hall -> empty room with NPC --> first room
 - empty room after first arena, with NPC
 - second arena
 - final room with an NPC that says that the game isn't done yet
+- rooms have background scenery instead of a wall
 
 ### Arena elements
 
