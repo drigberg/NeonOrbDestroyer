@@ -139,10 +139,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cab851de1814bf186b265818a3836d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuController: {fileID: 0}
   menuButtonController: {fileID: 0}
   animator: {fileID: 1120576109}
   animatorFunctions: {fileID: 1088965559617320634}
   thisIndex: 0
+  action: 0
+  text: {fileID: 715450882012552304}
+  targetScreenIndex: 0
 --- !u!95 &1120576109
 Animator:
   serializedVersion: 3

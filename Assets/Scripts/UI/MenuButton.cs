@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class MenuButton : MonoBehaviour
     [SerializeField] public Animator animator;
     [SerializeField] public AnimatorFunctions animatorFunctions;
     [SerializeField] public int thisIndex;
-    public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU, GO_TO_SCREEN, UNPAUSE};
+    public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU, GO_TO_SCREEN, UNPAUSE, TOGGLE_MUTE};
     public Action action;
+    public Text text;
 
     [Header ("Go-To-Screen Options")]
     public int targetScreenIndex;
@@ -54,6 +56,7 @@ public class MenuButton : MonoBehaviour
         {
             yield return 0;
         }
+
         if (action == Action.NEW_GAME_EASY) {
             menuController.GoToArenaScene(false);
         } else if (action == Action.NEW_GAME_HARD) {
@@ -65,6 +68,9 @@ public class MenuButton : MonoBehaviour
         } else if (action == Action.UNPAUSE) {
             menuController.DisableAllScreens();
             Time.timeScale = 1f;
+        } else if (action == Action.TOGGLE_MUTE) {
+            bool muted = GameSettings.ToggleMute();
+            text.text = muted ? "UNMUTE" : "MUTE";
         }
         menuButtonController.Enable();
     }
