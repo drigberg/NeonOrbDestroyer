@@ -10,6 +10,7 @@ You're trapped in the House of Glow! Fight your way out!
 
 - bigger map, zoomed out
 - pause
+- volume controls in pause menu
 
 ### Audio
 

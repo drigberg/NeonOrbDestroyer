@@ -35,7 +35,7 @@ ModelImporter:
     second: Armature|Rolling
   - first:
       74: 6881873686158965456
-    second: Armature|Falling
+    second: Armature|RollingAttack
   - first:
       74: -4728361552675377119
     second: Armature|Standing
@@ -114,11 +114,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Falling
-      takeName: Armature|Falling
+      name: Armature|RollingAttack
+      takeName: Armature|RollingAttack
       internalID: 0
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
