@@ -8,32 +8,36 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Menus
 
-1. pause menu
-2. volume controls in main menu
+1. volume controls in main menu
 
 ### Camera
 
-3. camera and text are clearly positioned
+2. camera and text are clearly positioned
 
 ### Audio
 
-4. game over sound
-5. better jumping and damage sounds
-6. attacking sound
-7. ambient menu music
-8. game music
+3. game over sound
+4. better jumping and damage sounds
+5. attacking sound
+6. ambient menu music
+7. game music
 
 ### Player
 
-9. regular attack only casts forwards
-10. attack still casts everywhere while spinning, but not as far
-11. nicer attack animation: sword trail? swinging sword down?
+8. regular attack only casts forwards
+9. attack still casts everywhere while spinning, but not as far
+10. nicer attack animation: sword trail? swinging sword down?
 
 ## TODO: V2
+
+### Audio
+
+- consolidate audio sources
 
 ### Menus
 
 - menu buttons broadcast "Action" message, which is heard by child component
+- disable animation for the unpause button, or smooth out the timing issue
 
 ### Player
 

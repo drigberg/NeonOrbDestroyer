@@ -9,7 +9,7 @@ public class MenuButton : MonoBehaviour
     [SerializeField] public Animator animator;
     [SerializeField] public AnimatorFunctions animatorFunctions;
     [SerializeField] public int thisIndex;
-    public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU, GO_TO_SCREEN};
+    public enum Action {NEW_GAME_EASY, NEW_GAME_HARD, RETURN_TO_MENU, GO_TO_SCREEN, UNPAUSE};
     public Action action;
 
     [Header ("Go-To-Screen Options")]
@@ -48,8 +48,12 @@ public class MenuButton : MonoBehaviour
     IEnumerator OnSubmitAsync()
     {
         menuButtonController.Disable();
-        // wait for the button animation
-        yield return new WaitForSeconds(0.5f);
+        // this timing method works while Time.timeScale is 0!
+        float pauseEndTime = Time.realtimeSinceStartup + 0.5f;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
         if (action == Action.NEW_GAME_EASY) {
             menuController.GoToArenaScene(false);
         } else if (action == Action.NEW_GAME_HARD) {
@@ -58,6 +62,9 @@ public class MenuButton : MonoBehaviour
             menuController.GoToMenuScene();
         } else if (action == Action.GO_TO_SCREEN) {
             menuController.ShowScreenByIndex(targetScreenIndex);
+        } else if (action == Action.UNPAUSE) {
+            menuController.DisableAllScreens();
+            Time.timeScale = 1f;
         }
         menuButtonController.Enable();
     }

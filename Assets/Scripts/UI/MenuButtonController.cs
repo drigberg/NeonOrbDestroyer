@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuButtonController : MonoBehaviour {
-
-    // Use this for initialization
     public int index;
     [SerializeField] public bool keyDown;
     [SerializeField] public int maxIndex;

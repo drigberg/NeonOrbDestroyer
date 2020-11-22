@@ -6,7 +6,7 @@ public class ObjectGenerator : MonoBehaviour
 {
     public UI ui;
     public int countdownSeconds = 3;
-    private bool isEnabled = false;
+    public bool isEnabled = false;
 
     public Coin coinPrefab;
     public float coinGenerateProb = 0.001f;

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header ("UI")]
     public UI ui;
-    public MenuButtonController gameOverMenu;
+    public MenuController menuController;
     public Text scoreText;
 
     [Header ("Animation")]
@@ -91,6 +91,14 @@ public class PlayerController : MonoBehaviour
         HandleNonMovementInput();
         Move();
         HandleWeapon();
+        ListenForPause();
+    }
+
+    void ListenForPause() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            menuController.ShowScreenByIndex(1);
+            Time.timeScale = 0f;
+        }
     }
 
     void HandleWeapon() {
@@ -163,7 +171,7 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
         objectGenerator.Disable();
         scoreText.text = "SCORE: " + points;
-        gameOverMenu.gameObject.SetActive(true);
+        menuController.ShowScreenByIndex(0);
     }
 
     void HandleNonMovementInput() {
