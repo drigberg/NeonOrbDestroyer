@@ -6,24 +6,18 @@ You're trapped in the House of Glow! Fight your way out!
 
 ## TODO: V1
 
-### Camera
+### Player
 
-1. camera and text are clearly positioned
+1. small window for wall-jumping after breaking contact
+2. nicer attack animation: sword trail? swinging sword down?
 
 ### Audio
 
-2. game over sound
-3. better jumping and damage sounds
-4. attacking sound
-5. ambient menu music
-6. game music
-
-### Player
-
-7. small window for wall-jumping after breaking contact
-8. regular attack only casts forwards
-9. attack still casts everywhere while spinning, but not as far
-10. nicer attack animation: sword trail? swinging sword down?
+3. game over sound
+4. better jumping and damage sounds
+5. attacking sound
+6. ambient menu music
+7. game music
 
 ## TODO: V2
 
@@ -38,14 +32,15 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Player
 
+- regular attack only casts forwards and up
+- attack still casts everywhere while spinning, but not as far
+- can be damaged if hit from behind while attacking forwards
+- programmatic hearts
 - allow multiple wall jumps after contact with the wall is broken
-- while jumping, attack is forward plus both forward diagonals
-- while gripping the wall, attack is up and down
 - wall-gripping attack animation
 
 ### Scenes
 
-- bigger rooms, zoomed out
 - Empty starting room --> hall -> empty room with NPC --> first room
 - empty room after first arena, with NPC
 - second arena
