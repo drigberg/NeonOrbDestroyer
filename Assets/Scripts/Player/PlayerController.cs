@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
         onWallRight = Physics.CheckSphere(wallCheckRight.position, groundDistance, platformMask);
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
 
-        if (isGrounded) {
+        if (!onWallLeft && !onWallRight) {
             canWallJump = true;
         }
         animator.SetBool("isGrounded", isGrounded);

@@ -36,7 +36,6 @@ You're trapped in the House of Glow! Fight your way out!
 - attack still casts everywhere while spinning, but not as far
 - can be damaged if hit from behind while attacking forwards
 - programmatic hearts
-- allow multiple wall jumps after contact with the wall is broken
 - wall-gripping attack animation
 
 ### Scenes
