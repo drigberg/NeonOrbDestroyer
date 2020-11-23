@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyMask;
     public float enemyCheckDistance = 0.5f;
     public float attackReach = 0.25f;
+    public float wallJumpGracePeriodDuration = 0.06f;
 
     [Header ("Mesh")]
     public SkinnedMeshRenderer[] meshes;
@@ -60,6 +61,10 @@ public class PlayerController : MonoBehaviour
 
     // State
     private bool facingRight;
+    private bool hasWallJumpedOnThisWall;
+    private bool inWallJumpGracePeriod;
+    private bool onWallOrInGracePeriod;
+    private bool physicallyOnWall;
     private bool canWallJump;
     private bool attacking;
     private bool attackingDelayed;
@@ -116,9 +121,13 @@ public class PlayerController : MonoBehaviour
         onWallRight = Physics.CheckSphere(wallCheckRight.position, groundDistance, platformMask);
         onCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, platformMask);
 
-        if (!onWallLeft && !onWallRight) {
-            canWallJump = true;
+        bool lastFramePhysicallyOnWall = physicallyOnWall;
+        physicallyOnWall = onWallLeft || onWallRight;
+        onWallOrInGracePeriod = physicallyOnWall || inWallJumpGracePeriod;
+        if (lastFramePhysicallyOnWall && !physicallyOnWall) {
+            StartCoroutine("WallJumpGracePeriod");
         }
+
         animator.SetBool("isGrounded", isGrounded);
         animator.SetBool("grippingWallLeft", onWallLeft);
         animator.SetBool("grippingWallRight", onWallRight);
@@ -184,8 +193,8 @@ public class PlayerController : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
         // only allow one wall jump between touching the ground
-        if (onWallLeft || onWallRight) {
-            canWallJump = false;
+        if (onWallOrInGracePeriod) {
+            hasWallJumpedOnThisWall = true;
         }
         PlaySound(jumpSound);
     }
@@ -199,8 +208,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0f;
         }
 
-        // jump from ground or wall
-        bool canJump = isGrounded || (canWallJump && (onWallLeft || onWallRight));
+        bool canJump = isGrounded || (onWallOrInGracePeriod && !hasWallJumpedOnThisWall);
         if (Input.GetButtonDown("Jump") && canJump) {
             Jump();
         }
@@ -239,7 +247,13 @@ public class PlayerController : MonoBehaviour
             Vector3 movementOffSet = new Vector3(0, 0, (0 - transform.position.z) * 0.05f);
             controller.Move(movementOffSet);
         }
+    }
 
+    private IEnumerator WallJumpGracePeriod() {
+        inWallJumpGracePeriod = true;
+        yield return new WaitForSeconds(wallJumpGracePeriodDuration);
+        inWallJumpGracePeriod = false;
+        hasWallJumpedOnThisWall = false;
     }
 
     private IEnumerator TriggerInvincibility() {

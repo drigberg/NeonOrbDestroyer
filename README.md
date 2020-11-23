@@ -8,16 +8,15 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Player
 
-1. small window for wall-jumping after breaking contact
-2. nicer attack animation: sword trail? swinging sword down?
+1. nicer attack animation: sword trail? swinging sword down?
 
 ### Audio
 
-3. game over sound
-4. better jumping and damage sounds
-5. attacking sound
-6. ambient menu music
-7. game music
+2. game over sound
+3. better jumping and damage sounds
+4. attacking sound
+5. ambient menu music
+6. game music
 
 ## TODO: V2
 
