@@ -12,9 +12,7 @@ public class RavenMovement : MonoBehaviour
     public Transform bodyTransform;
 
     [Header ("Prefabs")]
-    public VerticalTrail trailPrefab;
     public Explosion explosionPrefab;
-    private VerticalTrail trail;
 
     [Header ("Materials")]
     public Material defaultMaterial;
@@ -44,23 +42,15 @@ public class RavenMovement : MonoBehaviour
     private bool isGrounded;
     private bool onWallLeft;
     private bool onWallRight;
-    private bool smoking;
 
     void Start() {
         mesh.material = defaultMaterial;
         StartFalling();
-        CreateSmokeTrail();
     }
 
     void StartFalling() {
         mode = Mode.FALLING;
         velocity.y = fallingSpeed * -1f;
-    }
-
-    void CreateSmokeTrail() {
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, velocity * -1f);
-        trail = Instantiate(trailPrefab, transform.position, rotation);
-        smoking = true;
     }
 
     void Update()
@@ -88,25 +78,17 @@ public class RavenMovement : MonoBehaviour
         bool hittingWall = (onWallLeft && velocity.x < 0) || (onWallRight && velocity.x > 0);
         if (hittingWall) {
             velocity.x *= -1f;
-            if (smoking) {
-                // kill old trail before creating new one
-                trail.StopSmoking();
-                CreateSmokeTrail();
-            }
         }
     }
 
     void Fall() {
         BounceOffWalls();
-        trail.transform.position = transform.position;
 
         if (isGrounded) {
             StartCoroutine("TriggerSelfDestructTimer");
             mode = Mode.RUNNING;
             velocity.x = maxSpeed * GetXDirection();
             velocity.y = 0f;
-            trail.StopSmoking();
-            smoking = false;
         }
 
         transform.Translate(velocity * Time.deltaTime);
@@ -171,9 +153,6 @@ public class RavenMovement : MonoBehaviour
     }
 
     void DestroySelf(bool explode) {
-        if (smoking) {
-            trail.StopSmoking();
-        }
         if (explode) {
             Explode();
         }

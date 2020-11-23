@@ -31,6 +31,8 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Player
 
+- no enemy collisions when invincible
+- stuck-on-corner bug
 - regular attack only casts forwards and up
 - attack still casts everywhere while spinning, but not as far
 - can be damaged if hit from behind while attacking forwards
