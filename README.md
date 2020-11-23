@@ -6,17 +6,13 @@ You're trapped in the House of Glow! Fight your way out!
 
 ## TODO: V1
 
-### Player
-
-1. nicer attack animation: sword trail? swinging sword down?
-
 ### Audio
 
-2. game over sound
-3. better jumping and damage sounds
-4. attacking sound
-5. ambient menu music
-6. game music
+1. game over sound
+2. better jumping and damage sounds
+3. attacking sound
+4. ambient menu music
+5. game music
 
 ## TODO: V2
 
@@ -31,6 +27,7 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Player
 
+- clean transitions
 - no enemy collisions when invincible
 - stuck-on-corner bug
 - regular attack only casts forwards and up
@@ -68,6 +65,7 @@ You're trapped in the House of Glow! Fight your way out!
 ### Enemies
 
 - more of them!
+- variants of existing enemies!
 - enemies with more health
 - enemies with projectiles
 - enemies with attack moves

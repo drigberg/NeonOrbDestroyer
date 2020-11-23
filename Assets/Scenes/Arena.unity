@@ -2639,7 +2639,7 @@ MonoBehaviour:
   ravenGenerateProbInitial: 0.005
   ravenProbStep: 0.00001
   maxSpawnX: 15
-  spawnHeight: 30
+  spawnHeight: 40
 --- !u!4 &2075461927
 Transform:
   m_ObjectHideFlags: 0

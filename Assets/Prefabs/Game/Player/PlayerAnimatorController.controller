@@ -365,7 +365,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Base
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7879601702477543728}
@@ -486,7 +486,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: Base
     m_StateMachine: {fileID: -1258402275939386742}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -528,7 +528,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.01
   m_TransitionOffset: 0
-  m_ExitTime: 0.8705723
+  m_ExitTime: 0
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -622,8 +622,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Stab
-  m_Speed: 3
+  m_Name: Slash
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6264075015944138274}
@@ -637,7 +637,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -1459885458655147702, guid: 2fa2ec17831c44c309cc39d38dc2e0e5,
+  m_Motion: {fileID: -9180895774499272927, guid: 2fa2ec17831c44c309cc39d38dc2e0e5,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -758,7 +758,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rolling
-  m_Speed: 4
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8141604246263977022}
