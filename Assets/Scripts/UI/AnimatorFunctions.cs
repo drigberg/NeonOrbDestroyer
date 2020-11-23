@@ -8,7 +8,7 @@ public class AnimatorFunctions : MonoBehaviour
     public bool disableOnce;
 
     void PlaySound(AudioClip whichSound){
-        if (!disableOnce){
+        if (!disableOnce && !GameSettings.muted){
             menuButtonController.audioSource.PlayOneShot (whichSound);
         } else{
             disableOnce = false;

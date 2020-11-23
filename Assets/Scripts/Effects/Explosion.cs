@@ -10,7 +10,7 @@ public class Explosion : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        if (playSound) {
+        if (playSound && !GameSettings.muted) {
             AudioSource audioSource = GetComponent<AudioSource>();
             audioSource.PlayOneShot(soundEffect);
         }

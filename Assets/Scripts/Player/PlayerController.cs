@@ -266,6 +266,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void PlaySound(AudioClip sound) {
-        audioSource.PlayOneShot(sound);
+        if (!GameSettings.muted) {
+            audioSource.PlayOneShot(sound);
+        }
     }
 }

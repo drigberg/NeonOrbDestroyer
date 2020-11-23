@@ -6,29 +6,24 @@ You're trapped in the House of Glow! Fight your way out!
 
 ## TODO: V1
 
-### Menus
-
-1. mute toggle in main menu and pause screen
-2. only one "new game" button
-
 ### Camera
 
-3. camera and text are clearly positioned
+1. camera and text are clearly positioned
 
 ### Audio
 
-4. game over sound
-5. better jumping and damage sounds
-6. attacking sound
-7. ambient menu music
-8. game music
+2. game over sound
+3. better jumping and damage sounds
+4. attacking sound
+5. ambient menu music
+6. game music
 
 ### Player
 
-9. small window for wall-jumping after breaking contact
-10. regular attack only casts forwards
-11. attack still casts everywhere while spinning, but not as far
-12. nicer attack animation: sword trail? swinging sword down?
+7. small window for wall-jumping after breaking contact
+8. regular attack only casts forwards
+9. attack still casts everywhere while spinning, but not as far
+10. nicer attack animation: sword trail? swinging sword down?
 
 ## TODO: V2
 

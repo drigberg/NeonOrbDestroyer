@@ -17,6 +17,11 @@ public class MenuButton : MonoBehaviour
     [Header ("Go-To-Screen Options")]
     public int targetScreenIndex;
 
+    void Start() {
+        if (action == Action.TOGGLE_MUTE) {
+            text.text = GameSettings.muted ? "UNMUTE" : "MUTE";
+        }
+    }
 
     // Update is called once per frame
     void Update() {
@@ -32,6 +37,10 @@ public class MenuButton : MonoBehaviour
             // we don't allow submit on Space because that's the player might be jumping when the game ends,
             // and then we immediately get sent to the main menu
             if (Input.GetKeyDown(KeyCode.Return)) {
+                // the mute button needs to take effect before the "submit" sound is played
+                if (action == Action.TOGGLE_MUTE) {
+                    GameSettings.ToggleMute();
+                }
                 animator.SetBool ("pressed", true);
                 OnSubmit();
             } else if (animator.GetBool ("pressed")) {
@@ -69,8 +78,8 @@ public class MenuButton : MonoBehaviour
             menuController.DisableAllScreens();
             Time.timeScale = 1f;
         } else if (action == Action.TOGGLE_MUTE) {
-            bool muted = GameSettings.ToggleMute();
-            text.text = muted ? "UNMUTE" : "MUTE";
+            // muting is handled in Update()
+            text.text = GameSettings.muted ? "UNMUTE" : "MUTE";
         }
         menuButtonController.Enable();
     }
