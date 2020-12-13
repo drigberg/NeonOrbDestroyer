@@ -4,13 +4,6 @@
 
 You're trapped in the House of Glow! Fight your way out!
 
-## TODO: V1
-
-### Audio
-
-1. attacking sound
-2. ambient menu music
-
 ## TODO: V2
 
 ### Audio
@@ -18,6 +11,7 @@ You're trapped in the House of Glow! Fight your way out!
 - consolidate audio sources
 - better game music
 - better jumping/attacking/damage sounds
+- ambient menu music
 
 ### Menus
 

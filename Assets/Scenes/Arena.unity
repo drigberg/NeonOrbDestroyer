@@ -3059,6 +3059,11 @@ PrefabInstance:
       propertyPath: gameOverMusic
       value: 
       objectReference: {fileID: 1721431365}
+    - target: {fileID: 8355071575326622450, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
+        type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cec5ad6a2866740edbc18b3509d42fb2, type: 3}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.x

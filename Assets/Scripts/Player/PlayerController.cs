@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     [Header ("Audio")]
     public AudioClip jumpSound;
+    public AudioClip attackSound;
     private AudioSource audioSource;
     public AudioPlayer backgroundMusic;
     public AudioPlayer gameOverMusic;
@@ -270,6 +271,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Attack() {
         attacking = true;
+        PlaySound(attackSound);
         animator.SetBool("attacking", true);
         yield return new WaitForSeconds(attackDuration);
         attacking = false;
