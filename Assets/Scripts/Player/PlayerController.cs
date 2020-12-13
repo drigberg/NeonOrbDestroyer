@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     [Header ("Audio")]
     public AudioClip jumpSound;
     private AudioSource audioSource;
+    public AudioPlayer backgroundMusic;
+    public AudioPlayer gameOverMusic;
 
     // State
     private bool facingRight;
@@ -177,10 +179,12 @@ public class PlayerController : MonoBehaviour
     }
 
     void GameOver() {
-        Destroy(gameObject);
+        backgroundMusic.Pause();
+        gameOverMusic.PlayAfterDelay();
         objectGenerator.Disable();
         scoreText.text = "SCORE: " + points;
         menuController.ShowScreenByIndex(0);
+        Destroy(gameObject);
     }
 
     void HandleNonMovementInput() {
