@@ -6,8 +6,18 @@ You're trapped in the House of Glow! Fight your way out!
 
 ## TODO: V2
 
+### Scenes
+
+- arena has a glow gauge that collects glow from destroyed enemies
+- empty starting room --> hall -> empty room with NPC --> first room
+- empty room after first arena, with NPC
+- second arena
+- final room with an NPC that says that the game isn't done yet
+- rooms have background scenery instead of a wall
+
 ### Audio
 
+- trim the audio files
 - consolidate audio sources
 - better game music
 - better jumping/attacking/damage sounds
@@ -28,14 +38,6 @@ You're trapped in the House of Glow! Fight your way out!
 - can be damaged if hit from behind while attacking forwards
 - programmatic hearts
 - wall-gripping attack animation
-
-### Scenes
-
-- Empty starting room --> hall -> empty room with NPC --> first room
-- empty room after first arena, with NPC
-- second arena
-- final room with an NPC that says that the game isn't done yet
-- rooms have background scenery instead of a wall
 
 ### Arena elements
 

@@ -5,7 +5,7 @@
 
     // args for listener to set
     public bool dealDamage;
-    public int points;
+    public int glow;
 
     public SendExplodeArgs() {}
 }

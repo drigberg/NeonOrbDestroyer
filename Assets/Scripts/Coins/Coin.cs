@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int points = 100;
+    public int glow = 100;
     public Transform groundCheck;
     public VerticalTrail trailPrefab;
     public Explosion explosionPrefab;
@@ -104,7 +104,7 @@ public class Coin : MonoBehaviour
     }
 
     void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
-        sendExplodeArgs.points = points;
+        sendExplodeArgs.glow = glow;
         DestroySelf(true);
     }
 

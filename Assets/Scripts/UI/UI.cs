@@ -5,13 +5,7 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public Text pointsText;
     public Text countdownText;
-
-    public void SetPoints(int points) {
-        pointsText.gameObject.SetActive(true);
-        pointsText.text = points.ToString();
-    }
 
     public void SetCountdown(int seconds) {
         countdownText.gameObject.SetActive(true);

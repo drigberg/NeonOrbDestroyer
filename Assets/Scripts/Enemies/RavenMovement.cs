@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RavenMovement : MonoBehaviour
 {
-    public int points = 25;
+    public int glow = 25;
 
     [Header ("Animation")]
     public Animator animator;
@@ -139,7 +139,7 @@ public class RavenMovement : MonoBehaviour
         if (!sendExplodeArgs.invincible) {
             bool explode = false;
             if (sendExplodeArgs.attacking) {
-                sendExplodeArgs.points = points;
+                sendExplodeArgs.glow = glow;
                 explode = true;
             } else {
                 sendExplodeArgs.dealDamage = true;

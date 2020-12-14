@@ -20,6 +20,10 @@ public class ObjectGenerator : MonoBehaviour
     public float spawnHeight = 30f;
 
     void Start() {
+        ui.HideCountdown();
+    }
+
+    public void Activate() {
         StartCoroutine("CountdownToStart");
     }
 

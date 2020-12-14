@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header ("UI")]
-    public UI ui;
     public MenuController menuController;
-    public Text scoreText;
+
+    [Header ("Controllers")]
+    public Arena activeArena;
+    public CharacterController controller;
 
     [Header ("Animation")]
     public Animator animator;
@@ -17,11 +19,6 @@ public class PlayerController : MonoBehaviour
     public Transform rightElbow;
     public Transform rightHand;
     private Weapon weapon;
-
-    [Header ("Controllers")]
-    public CharacterController controller;
-    public Hearts hearts;
-    public ObjectGenerator objectGenerator;
 
     [Header ("Prefabs")]
     public Explosion explosionPrefab;
@@ -49,7 +46,6 @@ public class PlayerController : MonoBehaviour
     public float maxWallSlidingSpeed = -10f;
     public float jumpHeight = 6f;
 
-
     [Header ("Timers")]
     public float attackDuration = 0.25f;
     public float attackDelayDuration = 0.1f;
@@ -76,7 +72,6 @@ public class PlayerController : MonoBehaviour
     private bool onWallLeft;
     private bool onWallRight;
     private bool onCeiling;
-    private int points;
     private Vector3 velocity;
 
     void SetMesh(Material material) {
@@ -91,7 +86,6 @@ public class PlayerController : MonoBehaviour
         weapon.transform.parent = rightHand.transform;
         audioSource = GetComponent<AudioSource>();
         SetMesh(defaultMaterial);
-        points = 0;
     }
 
     void Update() {
@@ -143,6 +137,7 @@ public class PlayerController : MonoBehaviour
         }
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, enemyCheckRadius, enemyMask);
         bool damageDealt = false;
+        float collectedGlow = 0;
         foreach (var hitCollider in hitColliders) {
             // tell the other object that we hit it and pass a mutable object to get data back
             SendExplodeArgs sendExplodeArgs = new SendExplodeArgs();
@@ -150,15 +145,16 @@ public class PlayerController : MonoBehaviour
             sendExplodeArgs.attacking = attacking;
             hitCollider.SendMessage("ExplodeListener", sendExplodeArgs);
 
-            // listening object determines whether damage is dealt, and whether points are received
+            // listening object determines whether damage is dealt, and whether glow is received
             if (sendExplodeArgs.dealDamage) {
                 damageDealt = true;
             }
-            // points defaults to 0, so we can always add them
-            // NOTE: if an enemy hits us in the same frame we're getting a coin, we just accept the coin points
-            points += sendExplodeArgs.points;
+            // glow defaults to 0, so we can always add them
+            // NOTE: if an enemy hits us in the same frame we're getting a coin, we just accept the coin glow
+            collectedGlow += sendExplodeArgs.glow;
         }
-        ui.SetPoints(points);
+
+        activeArena.glowGauge.AddGlow(collectedGlow);
         // we only take damage once per frame, even if we're hit by multiple enemies
         if (damageDealt) {
             TakeDamage();
@@ -167,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage() {
         Explode();
-        int heartsRemaining = hearts.SubtractOne();
+        int heartsRemaining = activeArena.hearts.SubtractOne();
         if (heartsRemaining > 0) {
             StartCoroutine("TriggerInvincibility");
         } else {
@@ -182,8 +178,7 @@ public class PlayerController : MonoBehaviour
     void GameOver() {
         backgroundMusic.Pause();
         gameOverMusic.PlayAfterDelay();
-        objectGenerator.Disable();
-        scoreText.text = "SCORE: " + points;
+        activeArena.objectGenerator.Disable();
         menuController.ShowScreenByIndex(0);
         Destroy(gameObject);
     }
