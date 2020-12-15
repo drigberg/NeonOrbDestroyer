@@ -1178,7 +1178,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 1675308384}
   gameOverMusic: {fileID: 1721431365}
   cameraLockX: 0
-  cameraLockSpeed: 10
+  cameraLockSpeed: 15
   mainCamera: {fileID: 1265097160}
   leftWall: {fileID: 1263553753}
   rightWall: {fileID: 158004343}
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arena: {fileID: 440654056}
-  glowRequired: 300
+  glowRequired: 50
 --- !u!1001 &1430918141
 PrefabInstance:
   m_ObjectHideFlags: 0

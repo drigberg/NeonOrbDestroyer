@@ -29,9 +29,8 @@ public class Arena : MonoBehaviour
     public float leftWallLoweredY;
     public float rightWallRaisedY;
 
-    [Header ("State")]
-    private bool lockingCamera = false;
-    private bool activated = false;
+    private enum LockMode {LOCKED_TO_PLAYER, LOCKING_TO_PLAYER, LOCKED_TO_ARENA, LOCKING_TO_ARENA};
+    private LockMode cameraLock = LockMode.LOCKED_TO_PLAYER;
     private bool loweringLeftWall = false;
     private bool raisingRightWall = false;
 
@@ -44,13 +43,20 @@ public class Arena : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!activated) {
+        if (cameraLock == LockMode.LOCKED_TO_PLAYER) {
             mainCamera.position = new Vector3(player.transform.position.x, mainCamera.position.y, mainCamera.position.z);
-        } else if (lockingCamera) {
+        } else if (cameraLock == LockMode.LOCKING_TO_ARENA) {
             mainCamera.position = Vector3.MoveTowards(mainCamera.position, cameraLockPosition, cameraLockSpeed * Time.deltaTime);
             if (Vector3.Distance(mainCamera.position, cameraLockPosition) < 0.1f) {
                 mainCamera.position = cameraLockPosition;
-                lockingCamera = false;
+                cameraLock = LockMode.LOCKED_TO_ARENA;
+            }
+        } else if (cameraLock == LockMode.LOCKING_TO_PLAYER) {
+            Vector3 playerLockPosition = new Vector3(player.transform.position.x, mainCamera.position.y, mainCamera.position.z);
+            mainCamera.position = Vector3.MoveTowards(mainCamera.position, playerLockPosition, cameraLockSpeed * Time.deltaTime);
+            if (Vector3.Distance(mainCamera.position, playerLockPosition) < 0.1f) {
+                mainCamera.position = playerLockPosition;
+                cameraLock = LockMode.LOCKED_TO_PLAYER;
             }
         }
 
@@ -65,25 +71,33 @@ public class Arena : MonoBehaviour
         if (raisingRightWall) {
             rightWall.Translate(Vector3.up * wallMoveSpeed * Time.deltaTime);
             if (rightWall.position.y >= rightWallRaisedY) {
-                rightWall.position = new Vector3(rightWall.position.x, leftWallLoweredY, rightWall.position.z);
+                rightWall.position = new Vector3(rightWall.position.x, rightWallRaisedY, rightWall.position.z);
                 raisingRightWall = false;
             }
         }
     }
 
+    public void Begin() {
+        cameraLock = LockMode.LOCKING_TO_ARENA;
+        hearts.gameObject.SetActive(true);
+        BeginLoweringLeftWall();
+    }
+
+    public void End() {
+        cameraLock = LockMode.LOCKING_TO_PLAYER;
+        hearts.gameObject.SetActive(false);
+        BeginRaisingRightWall();
+        objectGenerator.Disable();
+        backgroundMusic.Pause();
+        // TODO: play victory music after delay
+    }
+
     void BeginLoweringLeftWall() {
         loweringLeftWall = true;
-        lockingCamera = true;
     }
 
     void BeginRaisingRightWall() {
         raisingRightWall = true;
-    }
-
-    public void Begin() {
-        activated = true;
-        hearts.gameObject.SetActive(true);
-        BeginLoweringLeftWall();
     }
 
     public void GameOver() {
@@ -91,7 +105,6 @@ public class Arena : MonoBehaviour
         gameOverMusic.PlayAfterDelay();
         objectGenerator.Disable();
     }
-
 
     private IEnumerator CountdownToStart() {
         objectGenerator.Reset();

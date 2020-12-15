@@ -22,7 +22,8 @@ public class GlowGauge : MonoBehaviour
     public void AddGlow(float glowToAdd) {
         glow += glowToAdd;
         if (glow >= glowRequired) {
-
+            arena.End();
+            glow = 0f;
         }
     }
 }
