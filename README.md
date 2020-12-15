@@ -9,8 +9,6 @@ You're trapped in the House of Glow! Fight your way out!
 ### Scenes
 
 - arena has a glow gauge that collects glow from destroyed enemies
-- empty starting room --> hall -> empty room with NPC --> first room
-- empty room after first arena, with NPC
 - second arena
 - final room with an NPC that says that the game isn't done yet
 - rooms have background scenery instead of a wall
