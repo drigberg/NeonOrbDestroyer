@@ -1178,6 +1178,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 1675308384}
   gameOverMusic: {fileID: 1721431365}
   cameraLockX: 0
+  cameraLockSpeed: 10
   mainCamera: {fileID: 1265097160}
   leftWall: {fileID: 1263553753}
   rightWall: {fileID: 158004343}
@@ -3723,7 +3724,7 @@ PrefabInstance:
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -59.6
       objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}

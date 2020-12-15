@@ -17,7 +17,9 @@ public class Arena : MonoBehaviour
 
     [Header ("Camera")]
     public float cameraLockX = 0f;
+    public float cameraLockSpeed = 1f;
     public Transform mainCamera;
+    private Vector3 cameraLockPosition;
 
     [Header ("Wall Gates")]
     public Transform leftWall;
@@ -28,22 +30,30 @@ public class Arena : MonoBehaviour
     public float rightWallRaisedY;
 
     [Header ("State")]
+    private bool lockingCamera = false;
     private bool activated = false;
     private bool loweringLeftWall = false;
     private bool raisingRightWall = false;
 
     // Start is called before the first frame update
     void Start() {
+        cameraLockPosition = new Vector3(cameraLockX, mainCamera.position.y, mainCamera.position.z);
         ui.HideCountdown();
         hearts.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!activated) {
             mainCamera.position = new Vector3(player.transform.position.x, mainCamera.position.y, mainCamera.position.z);
+        } else if (lockingCamera) {
+            mainCamera.position = Vector3.MoveTowards(mainCamera.position, cameraLockPosition, cameraLockSpeed * Time.deltaTime);
+            if (Vector3.Distance(mainCamera.position, cameraLockPosition) < 0.1f) {
+                mainCamera.position = cameraLockPosition;
+                lockingCamera = false;
+            }
         }
+
         if (loweringLeftWall) {
             leftWall.Translate(Vector3.up * -1f * wallMoveSpeed * Time.deltaTime);
             if (leftWall.position.y <= leftWallLoweredY) {
@@ -63,6 +73,7 @@ public class Arena : MonoBehaviour
 
     void BeginLoweringLeftWall() {
         loweringLeftWall = true;
+        lockingCamera = true;
     }
 
     void BeginRaisingRightWall() {
@@ -71,7 +82,6 @@ public class Arena : MonoBehaviour
 
     public void Begin() {
         activated = true;
-        mainCamera.position = new Vector3(cameraLockX, mainCamera.position.y, mainCamera.position.z);
         hearts.gameObject.SetActive(true);
         BeginLoweringLeftWall();
     }
