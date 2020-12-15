@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header ("Controllers")]
     public Arena activeArena;
     public CharacterController controller;
+    public NPC activeNPC;
 
     [Header ("Animation")]
     public Animator animator;
@@ -180,6 +181,9 @@ public class PlayerController : MonoBehaviour
     }
 
     void HandleNonMovementInput() {
+        if (activeNPC && Input.GetKeyDown(KeyCode.Return)) {
+            activeNPC.NextMessage();
+        }
         if (Input.GetKeyDown(KeyCode.M) && !attacking && !invincible && !attackingDelayed) {
             StartCoroutine("Attack");
         }
