@@ -10,17 +10,14 @@ public class ObjectGenerator : MonoBehaviour
     public float coinGenerateProb = 0.001f;
 
     public RavenMovement RavenPrefab;
-    public float ravenGenerateProbInitial = 0.005f;
-    public float ravenProbStep = 0.00001f;
-    private float ravenGenerateProb;
+    public float ravenGenerateProb = 0.005f;
 
-    public float maxSpawnX = 15f;
-    public float spawnHeight = 30f;
+    public Transform centerSpawnPoint;
+    public float spawnXSpread = 15f;
 
     void Start() {}
 
     public void Reset() {
-        ravenGenerateProb = ravenGenerateProbInitial;
         isEnabled = false;
     }
 
@@ -44,20 +41,26 @@ public class ObjectGenerator : MonoBehaviour
 
     void GenerateCoin() {
         if (Random.Range(0f, 1f) < coinGenerateProb) {
-            float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
-            Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
+            Vector3 spawnPoint = GetSpawnPoint();
             Coin coin = Instantiate(coinPrefab, spawnPoint, new Quaternion());
             coin.transform.parent = gameObject.transform;
         }
     }
 
     void GenerateRaven() {
-        ravenGenerateProb += ravenProbStep * Time.deltaTime;
         if (Random.Range(0f, 1f) < ravenGenerateProb) {
-            float spawnX = Random.Range(maxSpawnX * -1f, maxSpawnX);
-            Vector3 spawnPoint = new Vector3(spawnX, spawnHeight, 0f);
+            Vector3 spawnPoint = GetSpawnPoint();
             RavenMovement raven = Instantiate(RavenPrefab, spawnPoint, new Quaternion());
             raven.transform.parent = gameObject.transform;
         }
+    }
+
+    Vector3 GetSpawnPoint() {
+        Vector3 spawnPoint = new Vector3(
+            Random.Range(centerSpawnPoint.position.x - spawnXSpread, centerSpawnPoint.position.x + spawnXSpread),
+            centerSpawnPoint.position.y,
+            0f);
+
+        return spawnPoint;
     }
 }

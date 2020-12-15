@@ -8,6 +8,12 @@ public class PlayerController : MonoBehaviour
     [Header ("UI")]
     public MenuController menuController;
 
+    [Header ("Camera")]
+    public Transform mainCamera;
+    public float cameraLockSpeed = 10f;
+    public enum CameraLockMode {LOCKED_TO_PLAYER, LOCKING_TO_PLAYER, LOCKED_TO_ARENA, LOCKING_TO_ARENA};
+    public CameraLockMode cameraLock = CameraLockMode.LOCKED_TO_PLAYER;
+
     [Header ("Controllers")]
     public Arena activeArena;
     public CharacterController controller;
@@ -91,8 +97,28 @@ public class PlayerController : MonoBehaviour
         CheckForCollisions();
         HandleNonMovementInput();
         Move();
+        MoveCamera();
         HandleWeapon();
         ListenForPause();
+    }
+
+    void MoveCamera() {
+        if (cameraLock == CameraLockMode.LOCKED_TO_PLAYER) {
+            mainCamera.position = new Vector3(transform.position.x, mainCamera.position.y, mainCamera.position.z);
+        } else if (cameraLock == CameraLockMode.LOCKING_TO_ARENA) {
+            LockCameraToX(activeArena.transform.position.x, CameraLockMode.LOCKED_TO_ARENA);
+        } else if (cameraLock == CameraLockMode.LOCKING_TO_PLAYER) {
+            LockCameraToX(transform.position.x, CameraLockMode.LOCKED_TO_PLAYER);
+        }
+    }
+
+    void LockCameraToX(float lockX, CameraLockMode lockModeOnSuccess) {
+        Vector3 cameraLockPosition = new Vector3(lockX, mainCamera.position.y, mainCamera.position.z);
+        mainCamera.position = Vector3.MoveTowards(mainCamera.position, cameraLockPosition, cameraLockSpeed * Time.deltaTime);
+        if (Vector3.Distance(mainCamera.position, cameraLockPosition) < 0.1f) {
+            mainCamera.position = cameraLockPosition;
+            cameraLock = lockModeOnSuccess;
+        }
     }
 
     void ListenForPause() {
@@ -152,8 +178,9 @@ public class PlayerController : MonoBehaviour
             // NOTE: if an enemy hits us in the same frame we're getting a coin, we just accept the coin glow
             collectedGlow += sendExplodeArgs.glow;
         }
-
-        activeArena.glowGauge.AddGlow(collectedGlow);
+        if (collectedGlow > 0f && activeArena) {
+            activeArena.glowGauge.AddGlow(collectedGlow);
+        }
         // we only take damage once per frame, even if we're hit by multiple enemies
         if (damageDealt) {
             TakeDamage();
@@ -162,11 +189,13 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage() {
         Explode();
-        int heartsRemaining = activeArena.hearts.SubtractOne();
-        if (heartsRemaining > 0) {
-            StartCoroutine("TriggerInvincibility");
-        } else {
-            GameOver();
+        if (activeArena) {
+            int heartsRemaining = activeArena.hearts.SubtractOne();
+            if (heartsRemaining > 0) {
+                StartCoroutine("TriggerInvincibility");
+            } else {
+                GameOver();
+            }
         }
     }
 
@@ -175,7 +204,9 @@ public class PlayerController : MonoBehaviour
     }
 
     void GameOver() {
-        activeArena.GameOver();
+        if (activeArena) {
+            activeArena.GameOver();
+        }
         menuController.ShowScreenByIndex(0);
         Destroy(gameObject);
     }
