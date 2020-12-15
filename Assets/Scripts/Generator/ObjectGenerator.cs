@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
-    public UI ui;
-    public int countdownSeconds = 3;
     public bool isEnabled = false;
 
     public Coin coinPrefab;
@@ -19,40 +17,20 @@ public class ObjectGenerator : MonoBehaviour
     public float maxSpawnX = 15f;
     public float spawnHeight = 30f;
 
-    void Start() {
-        ui.HideCountdown();
-    }
+    void Start() {}
 
-    public void Activate() {
-        StartCoroutine("CountdownToStart");
-    }
-
-    void Reset() {
+    public void Reset() {
         ravenGenerateProb = ravenGenerateProbInitial;
         isEnabled = false;
     }
 
-    void Enable() {
+    public void Enable() {
         isEnabled = true;
     }
 
     public void Disable() {
         isEnabled = false;
         BroadcastMessage("DestroySelf", true, SendMessageOptions.DontRequireReceiver);
-    }
-
-    private IEnumerator CountdownToStart() {
-        Reset();
-        int steps = 0;
-        while (steps < countdownSeconds) {
-            ui.SetCountdown(countdownSeconds - steps);
-            yield return new WaitForSeconds(1);
-            steps += 1;
-        }
-        ui.CountDownZero();
-        yield return new WaitForSeconds(1);
-        ui.HideCountdown();
-        Enable();
     }
 
     // Update is called once per frame

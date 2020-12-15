@@ -55,8 +55,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip attackSound;
     private AudioSource audioSource;
-    public AudioPlayer backgroundMusic;
-    public AudioPlayer gameOverMusic;
 
     // State
     private bool facingRight;
@@ -176,9 +174,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void GameOver() {
-        backgroundMusic.Pause();
-        gameOverMusic.PlayAfterDelay();
-        activeArena.objectGenerator.Disable();
+        activeArena.GameOver();
         menuController.ShowScreenByIndex(0);
         Destroy(gameObject);
     }
