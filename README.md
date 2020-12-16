@@ -8,10 +8,7 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Scenes
 
-- arena has a glow gauge that collects glow from destroyed enemies
-- second arena
-- final room with an NPC that says that the game isn't done yet
-- rooms have background scenery instead of a wall
+- platforms and walls start dull and get brighter as glow is allocated
 
 ### Audio
 
@@ -30,6 +27,8 @@ You're trapped in the House of Glow! Fight your way out!
 
 - clean transitions
 - no enemy collisions when invincible
+- moving platform bug: horizontal
+- moving platform bug: vertical
 - stuck-on-corner bug
 - regular attack only casts forwards and up
 - attack still casts everywhere while spinning, but not as far
@@ -37,31 +36,36 @@ You're trapped in the House of Glow! Fight your way out!
 - programmatic hearts
 - wall-gripping attack animation
 
-### Arena elements
+### Enemies
 
-- moving platforms
-- vertical platforms for wall jumping
-- platforms pulse with the music
-- hearts beat with the music
+- variant: red raven (takes 2 hits to destroy)
+- new: gelatinous cube? (jumps and sticks to things)
 
-### High Score Table
+## TODO: V3
 
-- local high scores
-- global high scores: post to S3 with secret key? (separate scores by easy/hard mode)
+### Secrets
+
+- blue powerup behind a fake wall
 
 ### Drops
 
 - hearts restore health
-- blue power-up doubles the attack effect area
+- blue power-up doubles size of the sword
 - red power-up grants a special wide-range force field attack on N
+
+### NPCs
+
+- different standing positions
+- gestures
+- sounds
+- new dialogue if you go back after beating the next arena
+- gift of an extra heart if you visit the Welcomer after beating the second arena
 
 ### Enemies
 
-- more of them!
-- variants of existing enemies!
-- enemies with more health
-- enemies with projectiles
-- enemies with attack moves
+- variant: red cubes (2 hits to destroy)
+- variant: blue ravens (3 hits to destroy)
+- new: laser wyvern (3 hits to destroy, shoots projectiles)
 
 ## Credits
 

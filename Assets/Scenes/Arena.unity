@@ -2486,7 +2486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arena: {fileID: 2102330832}
-  glowRequired: 50
+  glowRequired: 200
 --- !u!135 &755862129
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3761,7 +3761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265097159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 358.5, y: 18.2, z: -15}
+  m_LocalPosition: {x: -58.3, y: 18.2, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -4061,7 +4061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arena: {fileID: 440654056}
-  glowRequired: 50
+  glowRequired: 200
 --- !u!1001 &1396517360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4555,8 +4555,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452154505}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 58.7, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalPosition: {x: 8, y: 40, z: 0}
+  m_LocalScale: {x: 50, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 282388533}
   m_RootOrder: 0
@@ -6686,7 +6686,7 @@ PrefabInstance:
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 304.9
+      value: -71.7
       objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
