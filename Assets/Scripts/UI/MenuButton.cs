@@ -71,7 +71,7 @@ public class MenuButton : MonoBehaviour
         } else if (action == Action.NEW_GAME_HARD) {
             menuController.GoToArenaScene(true);
         } else if (action == Action.RETURN_TO_MENU) {
-            menuController.GoToMenuScene();
+            menuController.GoToMenuScene(0f);
         } else if (action == Action.GO_TO_SCREEN) {
             menuController.ShowScreenByIndex(targetScreenIndex);
         } else if (action == Action.UNPAUSE) {

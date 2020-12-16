@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerCube : MonoBehaviour
+public class TriggerMove : MonoBehaviour
 {
-    public Arena arena;
     public Explosion explosionPrefab;
-    public int glow = 25;
     public float hoverRange = 2f;
     public float hoverSpeed = 2f;
     public float rotateSpeed = 0.2f;
@@ -26,15 +24,12 @@ public class TriggerCube : MonoBehaviour
       transform.Rotate(rotateSpeed, rotateSpeed, rotateSpeed, Space.Self);
     }
 
-    void ExplodeListener(SendExplodeArgs sendExplodeArgs) {
-        if (sendExplodeArgs.attacking) {
-            sendExplodeArgs.glow = glow;
-            arena.Begin();
-            DestroySelf(true);
-        }
+    public void HideSelfAndExplode() {
+        gameObject.SetActive(false);
+        Explode();
     }
 
-    void DestroySelf(bool explode) {
+    public void DestroySelf(bool explode) {
         Explode();
         Destroy(gameObject);
     }

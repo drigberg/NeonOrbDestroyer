@@ -30,8 +30,8 @@ public class MenuController : MonoBehaviour {
         StartCoroutine(LoadArenaAsync());
     }
 
-    public void GoToMenuScene() {
-        StartCoroutine(LoadMainMenuAsync());
+    public void GoToMenuScene(float delaySeconds) {
+        StartCoroutine(LoadMainMenuAsync(delaySeconds));
     }
 
     IEnumerator LoadArenaAsync()
@@ -43,8 +43,10 @@ public class MenuController : MonoBehaviour {
         }
     }
 
-    IEnumerator LoadMainMenuAsync()
+    IEnumerator LoadMainMenuAsync(float delaySeconds)
     {
+        Debug.Log("Loading...");
+        yield return new WaitForSeconds(delaySeconds);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Menu");
         while (!asyncLoad.isDone)
         {
