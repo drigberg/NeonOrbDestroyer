@@ -25,12 +25,15 @@ public class Arena : MonoBehaviour
     public int countdownSeconds = 3;
     public float leftWallLoweredY;
     public float rightWallRaisedY;
+    private float leftWallRaisedY;
 
     private bool loweringLeftWall = false;
     private bool raisingRightWall = false;
+    private bool raisingLeftWall = false;
 
     // Start is called before the first frame update
     void Start() {
+        leftWallRaisedY = leftWall.position.y;
         ui.HideCountdown();
         hearts.gameObject.SetActive(false);
     }
@@ -44,7 +47,14 @@ public class Arena : MonoBehaviour
                 loweringLeftWall = false;
                 StartCoroutine("CountdownToStart");
             }
+        } else if (raisingLeftWall) {
+            leftWall.Translate(Vector3.up * wallMoveSpeed * Time.deltaTime);
+            if (leftWall.position.y >= leftWallRaisedY) {
+                leftWall.position = new Vector3(leftWall.position.x, leftWallRaisedY, leftWall.position.z);
+                raisingLeftWall = false;
+            }
         }
+
         if (raisingRightWall) {
             rightWall.Translate(Vector3.up * wallMoveSpeed * Time.deltaTime);
             if (rightWall.position.y >= rightWallRaisedY) {
@@ -64,7 +74,7 @@ public class Arena : MonoBehaviour
     public void End() {
         player.cameraLock = PlayerController.CameraLockMode.LOCKING_TO_PLAYER;
         hearts.gameObject.SetActive(false);
-        BeginRaisingRightWall();
+        BeginRaisingWalls();
         objectGenerator.Disable();
         backgroundMusic.Pause();
         // TODO: play victory music after delay
@@ -74,7 +84,8 @@ public class Arena : MonoBehaviour
         loweringLeftWall = true;
     }
 
-    void BeginRaisingRightWall() {
+    void BeginRaisingWalls() {
+        raisingLeftWall = true;
         raisingRightWall = true;
     }
 

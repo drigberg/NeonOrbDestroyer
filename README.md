@@ -8,13 +8,13 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Scenes
 
-- platforms and walls start dull and get brighter as glow is allocated
 - glow orbs zoom towards platforms when released
 
 ### Audio
 
 - trim the audio files
 - music restarts in subsequent arenas
+- victory music at level end
 
 ### Player
 

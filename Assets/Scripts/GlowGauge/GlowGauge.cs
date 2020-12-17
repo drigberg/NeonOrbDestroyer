@@ -7,21 +7,19 @@ public class GlowGauge : MonoBehaviour
     public Arena arena;
     public float glowRequired;
     private float glow = 0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public MaterialGlowControl[] materialGlowControls;
 
     public void AddGlow(float glowToAdd) {
         glow += glowToAdd;
-        if (glow >= glowRequired) {
+        if (glow > glowRequired) {
+            glow = glowRequired;
+        }
+
+        foreach (MaterialGlowControl materialGlowControl in materialGlowControls) {
+            materialGlowControl.SetBrightness(glow / glowRequired);
+        }
+
+        if (glow == glowRequired) {
             arena.End();
             glow = 0f;
         }
