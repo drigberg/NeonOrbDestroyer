@@ -47,6 +47,7 @@ You're trapped in the House of Glow! Fight your way out!
 
 ### Drops
 
+- all drops fall from preset points to encourage players to go to difficult spots and traverse the map
 - hearts restore health
 - blue power-up doubles size of the sword
 - red power-up grants a special wide-range force field attack on N
