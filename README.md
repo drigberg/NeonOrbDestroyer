@@ -9,32 +9,16 @@ You're trapped in the House of Glow! Fight your way out!
 ### Scenes
 
 - platforms and walls start dull and get brighter as glow is allocated
+- glow orbs zoom towards platforms when released
 
 ### Audio
 
 - trim the audio files
-- consolidate audio sources
-- better game music
-- better jumping/attacking/damage sounds
-- ambient menu music
-
-### Menus
-
-- menu buttons broadcast "Action" message, which is heard by child component
-- disable animation for the unpause button, or smooth out the timing issue
+- music restarts in subsequent arenas
 
 ### Player
 
-- clean transitions
-- no enemy collisions when invincible
-- moving platform bug: horizontal
-- moving platform bug: vertical
-- stuck-on-corner bug
-- regular attack only casts forwards and up
-- attack still casts everywhere while spinning, but not as far
-- can be damaged if hit from behind while attacking forwards
-- programmatic hearts
-- wall-gripping attack animation
+- attack and body collisions are determined separately
 
 ### Enemies
 
@@ -42,6 +26,20 @@ You're trapped in the House of Glow! Fight your way out!
 - new: gelatinous cube? (jumps and sticks to things)
 
 ## TODO: V3
+
+### Player
+
+- programmatic hearts
+- wall-gripping attack animation
+- stuck-on-corner bug
+- regular attack only casts forwards and up
+- midair attack casts in all directions, but not as far
+
+### Audio
+
+- better game music
+- better jumping/attacking/damage sounds
+- ambient menu music
 
 ### Secrets
 
@@ -65,6 +63,21 @@ You're trapped in the House of Glow! Fight your way out!
 
 - variant: red cubes (2 hits to destroy)
 - variant: blue ravens (3 hits to destroy)
+
+## TODO: V4
+
+### Player
+
+- clean transitions between animations
+- no enemy collisions when invincible
+
+### Menus
+
+- menu buttons broadcast "Action" message, which is heard by child component
+- disable animation for the unpause button, or smooth out the timing issue
+
+### Enemies
+
 - new: laser wyvern (3 hits to destroy, shoots projectiles)
 
 ## Credits

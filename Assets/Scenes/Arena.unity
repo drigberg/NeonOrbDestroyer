@@ -981,7 +981,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208487360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.25, y: 13.5, z: 0}
+  m_LocalPosition: {x: 17.25, y: 12.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 523841695}
@@ -1505,6 +1505,7 @@ MonoBehaviour:
   points:
   - {fileID: 1812289432}
   - {fileID: 978370667}
+  velocity: {x: 0, y: 0, z: 0}
   speed: 5
 --- !u!114 &344269266 stripped
 MonoBehaviour:
@@ -2637,6 +2638,7 @@ MonoBehaviour:
   points:
   - {fileID: 112489159}
   - {fileID: 2020882383}
+  velocity: {x: 0, y: 0, z: 0}
   speed: 2.5
 --- !u!1 &842530467
 GameObject:
@@ -3761,7 +3763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265097159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.3, y: 18.2, z: -15}
+  m_LocalPosition: {x: 260.8, y: 18.2, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -5893,7 +5895,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020882382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 12.25, z: 0}
+  m_LocalPosition: {x: 5, y: 12.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1122229740}
@@ -6485,6 +6487,7 @@ MonoBehaviour:
   points:
   - {fileID: 1120384082}
   - {fileID: 208487361}
+  velocity: {x: 0, y: 0, z: 0}
   speed: 5
 --- !u!1001 &1062104563745250855
 PrefabInstance:
@@ -6686,12 +6689,12 @@ PrefabInstance:
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.7
+      value: 261.3
       objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: 17.1
       objectReference: {fileID: 0}
     - target: {fileID: 8355071575326622451, guid: e1e0d1061e3a643f4a0b7baf446fd8f0,
         type: 3}

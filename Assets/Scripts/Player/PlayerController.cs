@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
 
     // State
+    private float xInput;
     private bool facingRight;
     private bool hasWallJumpedOnThisWall;
     private bool inWallJumpGracePeriod;
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
     private bool onWallRight;
     private bool onCeiling;
     private Vector3 velocity;
+    private Vector3 externalMovement;
 
     void SetMesh(Material material) {
         for (int i = 0; i < meshes.Length; i++) {
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Start() {
+        externalMovement = Vector3.zero;
         weapon = Instantiate(weaponPrefab, rightHand.position, rightHand.rotation);
         weapon.transform.parent = rightHand.transform;
         audioSource = GetComponent<AudioSource>();
@@ -95,11 +98,17 @@ public class PlayerController : MonoBehaviour
 
     void Update() {
         CheckForCollisions();
+        HandleMovementInput();
         HandleNonMovementInput();
-        Move();
+        HandleFloorsAndCeilings();
         MoveCamera();
         HandleWeapon();
         ListenForPause();
+    }
+
+    void FixedUpdate() {
+        GetPlatformMovement();
+        Move();
     }
 
     void MoveCamera() {
@@ -230,7 +239,26 @@ public class PlayerController : MonoBehaviour
         PlaySound(jumpSound);
     }
 
-    void Move() {
+    void GetPlatformMovement() {
+        RaycastHit hit;
+        if (isGrounded && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.0f, platformMask)) {
+            MovingPlatform movingPlatform = hit.transform.GetComponent<MovingPlatform>();
+            if (movingPlatform) {
+                externalMovement = movingPlatform.velocity;
+            }
+        } else {
+            externalMovement = Vector3.zero;
+        }
+
+    }
+
+    // private void OnControllerColliderHit(ControllerColliderHit hit) {
+    //     if (isGrounded && hit.transform.tag == "Platform") {
+    //         transform.SetParent(hit.transform);
+    //     }
+    // }
+
+    void HandleFloorsAndCeilings() {
         if (isGrounded && velocity.y < 0f) {
             // stop moving downwards on floors
             velocity.y = -2f;
@@ -239,18 +267,21 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0f;
         }
 
+    }
+
+    void HandleMovementInput() {
         bool canJump = isGrounded || (onWallOrInGracePeriod && !hasWallJumpedOnThisWall);
         if (Input.GetButtonDown("Jump") && canJump) {
             Jump();
         }
 
         // move left and right
-        float x = Input.GetAxisRaw("Horizontal");
-        if (x > 0) {
+        xInput = Input.GetAxisRaw("Horizontal");
+        if (xInput > 0) {
             facingRight = true;
             velocity.x = speed;
             animator.SetBool("movingLeftRight", true);
-        } else if (x < 0) {
+        } else if (xInput < 0) {
             facingRight = false;
             velocity.x = speed * -1f;
             animator.SetBool("movingLeftRight", true);
@@ -258,7 +289,9 @@ public class PlayerController : MonoBehaviour
             velocity.x = 0;
             animator.SetBool("movingLeftRight", false);
         }
+    }
 
+    void Move() {
         // rotate based on facing direction
         int targetRotation = facingRight ? 270 : 90;
         if (onWallLeft || onWallRight) {
@@ -268,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
 
         // slide downwards more slowly when gripping the wall
-        bool grippingWall = (onWallLeft && x < 0) || (onWallRight && x > 0);
+        bool grippingWall = (onWallLeft && xInput < 0) || (onWallRight && xInput > 0);
         velocity.y += gravity * Time.deltaTime;
         if (grippingWall && velocity.y < maxWallSlidingSpeed) {
             velocity.y = maxWallSlidingSpeed;
@@ -278,6 +311,7 @@ public class PlayerController : MonoBehaviour
             Vector3 movementOffSet = new Vector3(0, 0, (0 - transform.position.z) * 0.05f);
             controller.Move(movementOffSet);
         }
+        controller.Move(externalMovement);
     }
 
     private IEnumerator WallJumpGracePeriod() {
