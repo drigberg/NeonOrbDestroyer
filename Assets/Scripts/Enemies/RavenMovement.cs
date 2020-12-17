@@ -20,7 +20,7 @@ public class RavenMovement : MonoBehaviour
 
     [Header ("Collisions")]
     public float collisionDistance = 0.1f;
-    public LayerMask groundMask;
+    public LayerMask platformMask;
     public Transform wallCheckLeft;
     public Transform wallCheckRight;
     public Transform ceilingCheck;
@@ -30,6 +30,7 @@ public class RavenMovement : MonoBehaviour
     public float fallingSpeed = 5f;
     public float maxSpeed = 10f;
     private Vector3 velocity;
+    private Vector3 externalMovement;
     private enum Mode {FALLING, RUNNING};
     private Mode mode;
 
@@ -56,9 +57,9 @@ public class RavenMovement : MonoBehaviour
     void Update()
     {
         // check for collisions
-        isGrounded = Physics.CheckSphere(groundCheck.position, collisionDistance, groundMask);
-        onWallLeft = Physics.CheckSphere(wallCheckLeft.position, collisionDistance, groundMask);
-        onWallRight = Physics.CheckSphere(wallCheckRight.position, collisionDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, collisionDistance, platformMask);
+        onWallLeft = Physics.CheckSphere(wallCheckLeft.position, collisionDistance, platformMask);
+        onWallRight = Physics.CheckSphere(wallCheckRight.position, collisionDistance, platformMask);
 
         animator.SetBool("isGrounded", isGrounded);
 
@@ -68,6 +69,11 @@ public class RavenMovement : MonoBehaviour
             Run();
         }
         Rotate();
+        GetPlatformMovement();
+    }
+
+    void FixedUpdate() {
+        transform.Translate(velocity * Time.deltaTime + externalMovement);
     }
 
     float GetXDirection() {
@@ -90,8 +96,29 @@ public class RavenMovement : MonoBehaviour
             velocity.x = maxSpeed * GetXDirection();
             velocity.y = 0f;
         }
+    }
 
-        transform.Translate(velocity * Time.deltaTime);
+    void Run() {
+        BounceOffWalls();
+        if (isGrounded) {
+            velocity.y = 0f;
+        } else {
+            velocity.x = Mathf.Sqrt(maxSpeed * maxSpeed / 2f) * GetXDirection();
+            velocity.y = Mathf.Sqrt(maxSpeed * maxSpeed / 2f) * -1f;
+        }
+    }
+
+    void GetPlatformMovement() {
+        RaycastHit hit;
+        // the raven's position is too low, so we have to start casting from mid-body
+        if (isGrounded && Physics.Raycast(transform.position + Vector3.up * 1.0f, transform.TransformDirection(Vector3.down), out hit, 2.0f, platformMask)) {
+            MovingPlatform movingPlatform = hit.transform.GetComponent<MovingPlatform>();
+            if (movingPlatform) {
+                externalMovement = movingPlatform.velocity;
+            }
+        } else {
+            externalMovement = Vector3.zero;
+        }
     }
 
     private IEnumerator TriggerSelfDestructTimer() {
@@ -122,17 +149,6 @@ public class RavenMovement : MonoBehaviour
             }
         }
         bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, Quaternion.Euler(0, targetRotation, 0), 0.1f);
-    }
-
-    void Run() {
-        BounceOffWalls();
-        if (isGrounded) {
-            velocity.y = 0f;
-        } else {
-            velocity.x = Mathf.Sqrt(maxSpeed * maxSpeed / 2f) * GetXDirection();
-            velocity.y = Mathf.Sqrt(maxSpeed * maxSpeed / 2f) * -1f;
-        }
-        transform.Translate(velocity * Time.deltaTime);
     }
 
     public void ExplodeListener(SendExplodeArgs sendExplodeArgs) {

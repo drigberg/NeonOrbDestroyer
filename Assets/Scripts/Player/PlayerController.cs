@@ -249,14 +249,7 @@ public class PlayerController : MonoBehaviour
         } else {
             externalMovement = Vector3.zero;
         }
-
     }
-
-    // private void OnControllerColliderHit(ControllerColliderHit hit) {
-    //     if (isGrounded && hit.transform.tag == "Platform") {
-    //         transform.SetParent(hit.transform);
-    //     }
-    // }
 
     void HandleFloorsAndCeilings() {
         if (isGrounded && velocity.y < 0f) {
