@@ -76,7 +76,7 @@ public class Arena : MonoBehaviour
         hearts.gameObject.SetActive(false);
         BeginRaisingWalls();
         objectGenerator.Disable();
-        backgroundMusic.Pause();
+        backgroundMusic.Stop();
         // TODO: play victory music after delay
     }
 
@@ -90,7 +90,7 @@ public class Arena : MonoBehaviour
     }
 
     public void GameOver() {
-        backgroundMusic.Pause();
+        backgroundMusic.Stop();
         gameOverMusic.PlayAfterDelay();
         objectGenerator.Disable();
     }

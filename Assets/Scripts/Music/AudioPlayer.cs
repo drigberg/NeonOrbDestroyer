@@ -24,6 +24,10 @@ public class AudioPlayer : MonoBehaviour
         audioSource.Pause();
     }
 
+    public void Stop() {
+        audioSource.Stop();
+    }
+
     public void Play() {
         if (!GameSettings.muted) {
             audioSource.Play();
