@@ -59,8 +59,7 @@ crashlytics-build.properties
 
 # custom
 Demo Videos/
+Build/
 
 # OSX
 .DS_Store
-
-Build/
