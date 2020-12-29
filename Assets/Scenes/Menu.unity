@@ -1980,7 +1980,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NEON ORB DESTROYER
+  m_Text: THE HOUSE OF GLOW
 --- !u!222 &1859672373
 CanvasRenderer:
   m_ObjectHideFlags: 0
