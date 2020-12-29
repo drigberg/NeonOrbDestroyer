@@ -31,8 +31,16 @@ public class MaterialGlowControl : MonoBehaviour
         material.SetColor("_EmissionColor", new Color(initialEmissionColor.r * brightness, initialEmissionColor.g * brightness, initialEmissionColor.b * brightness));
     }
 
-    void OnApplicationQuit() {
+    public void Reset() {
         material.SetColor("_Color", initialColor);
         material.SetColor("_EmissionColor", initialEmissionColor);
+    }
+
+    void OnLevelWasLoaded() {
+        Reset();
+    }
+
+    void OnApplicationQuit() {
+        Reset();
     }
 }
