@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MaterialGlowControl : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class MaterialGlowControl : MonoBehaviour
 
         material.SetColor("_Color", new Color(0f, 0f, 0f));
         material.SetColor("_EmissionColor", new Color(0f, 0f, 0f));
+
+        SceneManager.activeSceneChanged += OnSceneChange;
     }
 
     public void SetBrightness(float brightness) {
@@ -31,16 +34,16 @@ public class MaterialGlowControl : MonoBehaviour
         material.SetColor("_EmissionColor", new Color(initialEmissionColor.r * brightness, initialEmissionColor.g * brightness, initialEmissionColor.b * brightness));
     }
 
-    public void Reset() {
+    void Reset() {
         material.SetColor("_Color", initialColor);
         material.SetColor("_EmissionColor", initialEmissionColor);
     }
 
-    void OnLevelWasLoaded() {
+    void OnApplicationQuit() {
         Reset();
     }
 
-    void OnApplicationQuit() {
+    void OnSceneChange(Scene current, Scene next) {
         Reset();
     }
 }
